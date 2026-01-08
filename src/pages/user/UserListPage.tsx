@@ -3,12 +3,13 @@ import { toast } from "sonner";
 import UserFormPage from "./UserFormPage";
 import UserTable from "./UserTable";
 
+// props parent component thi child component to pass data
 type User = {
   id: number;
   name: string;
   email: string;
 };
-
+// top to bottom read execution 
 const UserListPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -18,6 +19,7 @@ const UserListPage: React.FC = () => {
   // Load users from localStorage
   useEffect(() => {
     const storedUsers = localStorage.getItem("users");
+    console.log(storedUsers);
     if (storedUsers) {
       setUsers(JSON.parse(storedUsers));
     }
@@ -25,6 +27,7 @@ const UserListPage: React.FC = () => {
   // Input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // (...) to copy the values array,object
   };
   
   // Add user
@@ -107,14 +110,7 @@ const UserListPage: React.FC = () => {
         {/* User table */}
         <UserTable
           users={users}
-          onEdit={handleEdit}
-          // onEdit={(user) => {
-          //   setEditingUser(user);
-          //   setFormData({
-          //     name: user.name, email: user.email
-          //   });
-          //   setShowForm(true);
-          // }}
+          onEdit={handleEdit} 
           onDelete={handleDeleteUser}
         />
         <div className="mt-4 text-right font-semibold text-indigo-600">

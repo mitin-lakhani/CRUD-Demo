@@ -10,7 +10,7 @@ const Sidebar = () => {
 	};
 
 	return (
-		<div className="bg-gray-900 border-b text-white font-bold  border-gray-300  h-full flex flex-col items-center gap-10">
+		<div className="bg-gray-900 border-b text-white font-semibold  border-gray-300  h-203 flex flex-col items-center gap-10">
 			<div className="p-4 w-full flex justify-start ">
 				<img className="object-center h-full w-1/3 rounded-full border " src="src/assets/logo.png" alt="" />
 			</div>

@@ -10,5 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 		<Providers>
 			<RouterProvider router={router} />
 		</Providers>
-	</React.StrictMode>
+	 </React.StrictMode>
+	// strict mode to run code two types first time check and secound time run orizonal
 );

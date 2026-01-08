@@ -1,5 +1,6 @@
-import React,{ useState } from "react"; 
+import React, { useState } from "react";
 import ConfirmDialog from "@/components/ui/ShowDialog";
+// import EditUser from "./EditUser";
 
 type User = {
     id: number;
@@ -14,7 +15,11 @@ type UserTableProps = {
 };
 const UserTable: React.FC<UserTableProps> = ({ users, onDelete }) => {
     const [isOpen, setIsOpen] = useState(false);
+    // const [fomrdata,setFormdata] = useState(false);
 
+    // const editHandle = (user:User) =>{
+
+    // }
     return (
         <div className="overflow-x-auto font-bold">
             <table className="w-full border rounded-lg overflow-hidden text-center">
@@ -41,28 +46,30 @@ const UserTable: React.FC<UserTableProps> = ({ users, onDelete }) => {
                                 <td className="p-3">{user.email}</td>
                                 <td className="p-3 text-center flex justify-center gap-2">
                                     <button
-                                          
                                         type="button"
                                         className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500 transition"
                                     >
-                                    Edit
+                                        Edit
                                     </button>
+                                    {/* <EditUser
+                                        
+                                    /> */}
                                     <button
                                         onClick={() => setIsOpen(true)}
                                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
                                     >
                                         Delete
                                         <ConfirmDialog
-                                        isOpen={isOpen}
-                                        title="Delete User"
-                                        message="Are you sure you want to delete this user?"
-                                        confirmText="Delete"
-                                        cancelText="Cancel"
-                                        onConfirm={() => onDelete(user.email)}
-                                        onClose={() => setIsOpen(false)}
-                                    />
+                                            isOpen={isOpen}
+                                            title="Delete User"
+                                            message="Are you sure you want to delete this user?"
+                                            confirmText="Delete"
+                                            cancelText="Cancel"
+                                            onConfirm={() => onDelete(user.email)}
+                                            onClose={() => setIsOpen(false)}
+                                        />
                                     </button>
-                                    
+
                                 </td>
                             </tr>
                         ))
