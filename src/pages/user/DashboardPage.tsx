@@ -1,35 +1,17 @@
 // import { useEffect, useState } from "react";
 
-const DashboardPage = () => {
-	
+import { useAppState } from "@/utils/useAppState";
+
+
+
+const DashboardPage = () => {	
 	const user = {
 		UserName: "Mitin Patel",
-		role: "Frontend Developer",
+		// role: "Frontend Developer",
 		email: "mitin@gmail.com",
-		location: "India",
-		status: "Active",
+		// location: "India",
+		// status: "Active",
 	};
-
-	// Load theme from localStorage
-	// useEffect(() => {
-	// 	const theme = localStorage.getItem("theme");
-	// 	if (theme === "dark") {
-	// 		document.documentElement.classList.add("dark");
-	// 		setDarkMode(true);
-	// 	}
-	// }, []);
-
-	// Toggle theme
-	// const toggleTheme = () => {
-	// 	if (darkMode) {
-	// 		document.documentElement.classList.remove("dark");
-	// 		localStorage.setItem("theme", "light");
-	// 	} else {
-	// 		document.documentElement.classList.add("dark");
-	// 		localStorage.setItem("theme", "dark");
-	// 	}
-	// 	setDarkMode(!darkMode);
-	// };
 	
 	return (
 		<div className="h-full  bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 transition-colors">
@@ -51,11 +33,11 @@ const DashboardPage = () => {
 						alt="user"
 					/>
 					<h2 className="text-xl font-semibold">{user.UserName}</h2>
-					<p className="text-gray-500 dark:text-gray-400">{user.role}</p>
+					{/* <p className="text-gray-500 dark:text-gray-400">{user.role}</p> */}
 
-					<span className="mt-3 px-3 py-1 rounded-full text-sm bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300">
+					{/* <span className="mt-3 px-3 py-1 rounded-full text-sm bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300">
 						{user.status}
-					</span>
+					</span> */}
 
 					<button className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
 						View Profile
@@ -70,8 +52,8 @@ const DashboardPage = () => {
 						{[
 							["Full Name", user.UserName],
 							["Email", user.email],
-							["Role", user.role],
-							["Location", user.location],
+							// ["Role", user.role],
+							// ["Location", user.location],
 						].map(([label, value]) => (
 							<div
 								key={label}

@@ -7,6 +7,7 @@ export const RootLayout = () => {
 
 	useEffect(() => {
 		console.log("useEffect");
+		
 		return () => {
 			true;
 		};

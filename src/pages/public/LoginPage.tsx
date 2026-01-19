@@ -32,7 +32,7 @@ const LoginPage = () => {
 		console.log("Form Data:", data);
 		toast.success("Login Successful");
 		dispatch({ user });
-		reset();
+		reset();z
 		navigate("/dashboard");
 	};
 	return (

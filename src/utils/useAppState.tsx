@@ -23,7 +23,7 @@ export interface AppState {
 // ================== START: Initial State ==================
 export const initialState: AppState = {
   theme: "system",
-  user: null, // Will be populated after login
+  user:null, // Will be populated after login  
 };
 // ================== END: Initial State ==================
 

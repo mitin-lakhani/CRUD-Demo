@@ -28,6 +28,7 @@ const RegisterPage = () => {
 		users.push(data);
 		localStorage.setItem("users", JSON.stringify(users));
 		toast.success("Register Successful");
+		
 		reset();
 		// navigate to login page
 		navigate("/login");

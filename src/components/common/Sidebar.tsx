@@ -14,13 +14,19 @@ const Sidebar = () => {
 			<div className="p-4 w-full flex justify-start ">
 				<img className="object-center h-full w-1/3 rounded-full border " src="src/assets/logo.png" alt="" />
 			</div>
-			<div className="w-full h-full px-4 flex gap-4 items-start flex-col">
-				<Link to="/dashboard">Dashboard</Link>
+			<div className="w-full h-full px-4 flex gap-4 items-start justify-between
+			 flex-col">
+				<div className="flex flex-col gap-8">
+					<Link to="/dashboard">Dashboard</Link>
 				<Link to="/users">Users</Link>
-				<Link to="#" onClick={() => logout()}>
+				<Link to='/products'>Products</Link>
+				</div>
+				<div className="mb-4">
+					<Link to="#" onClick={() => logout()}>
 					Logout (<span>{user?.name}</span>)
 				</Link>
-				<Link to='/products'>Products</Link>
+				</div>
+				
 			</div>
 		</div>
 	);

@@ -26,3 +26,7 @@ export const adduserSchema = z.object({
 		name: z.string().min(3),
 })
 export type AdduserFormValue = z.infer<typeof adduserSchema>
+export const isAuthenticated = (): boolean => {
+	const user = localStorage.getItem("currentUser");
+	return !!user; // true if exists
+};

@@ -1,11 +1,12 @@
-export type IUser = {
-	id: string;
+export interface IUser {
+	id: number;
 	name: string;
 	email: string;
-};
-export type UserTableProps = {
+	password: string;
+	confirmPassword:string;
+}
+export interface UserTableProps {
 	users: IUser[];
 	onEdit: (user: IUser) => void;
 	onDelete: (email: string) => void;
-};
-
+}

@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
-
+import { BiHide } from "react-icons/bi";
+import { BiShow } from "react-icons/bi";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	errorMsg?: string;
@@ -32,9 +33,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 						}
 					>
 						{props.type === "password"
-							? type === "password"
-								? "A"
-								: "H"
+							? type === "password"	
+								? <BiHide className="text-green-600" size={20} />
+								: <BiShow className="text-red-500" size={20} />
 							: ""}
 					</span>
 				</div>
