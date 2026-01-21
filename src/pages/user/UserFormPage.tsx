@@ -84,7 +84,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
 				return;
 			}
 			const updatedUsers = [...users, newUser];
-			setUsers(updatedUsers);
+			setUsers(updatedUsers);	
 			toast.success("User added successfully");
 		}
 		localStorage.setItem("users", JSON.stringify(users));

@@ -6,6 +6,7 @@ import { loginSchema, type LoginFormValues } from "@/validations/auth.schema";
 import { toast } from "sonner";
 import { useAppState } from "@/utils/useAppState";
 import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const [, dispatch] = useAppState();
@@ -16,8 +17,8 @@ const LoginPage = () => {
 		reset,
 	} = useForm<LoginFormValues>({
 		resolver: zodResolver(loginSchema),
-	});
 
+	});
 	const onSubmit = (data: LoginFormValues) => {
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
 		const user = users.find((user: any) => user.email === data.email);
@@ -31,9 +32,13 @@ const LoginPage = () => {
 		}
 		console.log("Form Data:", data);
 		toast.success("Login Successful");
-		dispatch({ user });
-		reset();z
+		localStorage.setItem("user", JSON.stringify(user));
+			dispatch({ 
+				user
+			});
+		reset();
 		navigate("/dashboard");
+		
 	};
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)] dark:text-black">

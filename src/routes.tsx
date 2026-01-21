@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
 				],
 			},
 			{
-				element: <UserLayout />,
+				element: <UserLayout/>,
 				children: [
 					{ path: "/dashboard", element: <Dashboard /> },
 					{ path: "/users", element: <UserList /> },

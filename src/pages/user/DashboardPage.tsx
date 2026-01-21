@@ -1,18 +1,8 @@
-// import { useEffect, useState } from "react";
-
-import { useAppState } from "@/utils/useAppState";
-
-
-
+import { useAppState } from "@/utils/useAppState"
 const DashboardPage = () => {	
-	const user = {
-		UserName: "Mitin Patel",
-		// role: "Frontend Developer",
-		email: "mitin@gmail.com",
-		// location: "India",
-		// status: "Active",
-	};
-	
+	const [state] = useAppState();
+	const user = state.user;
+		
 	return (
 		<div className="h-full  bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 transition-colors">
 			
@@ -28,11 +18,11 @@ const DashboardPage = () => {
 				{/* User Card */}
 				<div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 flex flex-col items-center text-center">
 					<img
-						src="src/assets/logo.png"
+						src={user?.images || "src/assets/react.svg"}
 						className="w-24 h-24 rounded-full mb-4"
 						alt="user"
 					/>
-					<h2 className="text-xl font-semibold">{user.UserName}</h2>
+					<h2 className="text-xl font-semibold">{user?.name}</h2>
 					{/* <p className="text-gray-500 dark:text-gray-400">{user.role}</p> */}
 
 					{/* <span className="mt-3 px-3 py-1 rounded-full text-sm bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300">
@@ -50,8 +40,8 @@ const DashboardPage = () => {
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						{[
-							["Full Name", user.UserName],
-							["Email", user.email],
+							["Full Name", user?.name],
+							["Email", user?.email],
 							// ["Role", user.role],
 							// ["Location", user.location],
 						].map(([label, value]) => (

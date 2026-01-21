@@ -1,12 +1,15 @@
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useAppState } from "@/utils/useAppState";
 
 const Sidebar = () => {
 	// const navigate = useNavigate();
 	const [{ user }, dispatch] = useAppState();
+	const navigate = useNavigate();
 
 	const logout = () => {
 		dispatch({ user: null });
+		localStorage.removeItem('user')
+		navigate('/login');
 	};
 
 	return (

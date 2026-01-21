@@ -4,9 +4,10 @@ import {
   useContext,
   useEffect,
   useReducer,
-} from "react";
+  } from "react";
 import type { Dispatch, ReactNode, Reducer } from "react";
 import type { IUser } from "./types";
+
 // ================== END: Imports ==================
 
 // ================== START: Types ==================
@@ -36,6 +37,7 @@ export const reducer: Reducer<AppState, Partial<AppState>> = (
   partial,
 ) => {
   return { ...state, ...partial };
+  
 };
 // ================== END: Reducer ==================
 
@@ -66,6 +68,8 @@ export const StateProvider = ({
   reducer: Reducer<AppState, Partial<AppState>>;
   initialState: AppState;
   children: ReactNode;
+  
+  
 }) => {
   // ================== START: Resolve Initial State ==================
   /**
@@ -80,13 +84,14 @@ export const StateProvider = ({
         window.localStorage
       ) {
         const storedTheme = localStorage.getItem("theme");
+        const storedUser = localStorage.getItem("user");
 
         return {
           ...initialState,
           theme: storedTheme
             ? (storedTheme as AppState["theme"])
             : initialState.theme,
-          user: null,
+          user: storedUser ? JSON.parse(storedUser):null,
         };
       }
     } catch (e) {
@@ -99,6 +104,7 @@ export const StateProvider = ({
   const [state, dispatch] = useReducer(
     reducer,
     resolveInitialState(),
+    
   );
 
   // ================== START: Persist Dispatch ==================

@@ -4,6 +4,7 @@ export interface IUser {
 	email: string;
 	password: string;
 	confirmPassword:string;
+	images:"src/assets/react.svg";
 }
 export interface UserTableProps {
 	users: IUser[];
