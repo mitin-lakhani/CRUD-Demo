@@ -22,7 +22,6 @@ const UserListPage: React.FC = () => {
 	const handleEdit = (user: IUser) => {
 		setEditingUser(user);
 	};
-	// Update user
 
 	// Cancel form
 	const handleClose = () => {
@@ -33,7 +32,7 @@ const UserListPage: React.FC = () => {
 		<div className="h-full  p-6 bg-linear-to-r from-indigo-500 to-purple-200">
 			<div className="max-w-5xl mx-auto rounded-xl shadow-lg p-6 bg-white">
 				<h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
-					User Management
+					CRUD OPERATIONS
 				</h1>
 				{/* Form */}
 				{(showForm || editingUser) && (
