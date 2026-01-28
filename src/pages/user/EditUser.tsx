@@ -24,7 +24,7 @@
 //                         {...register("email")}
 //                         errorMsg={errors.email?.message}
 //                     />
-//                 </div>
+//                 </div>   
 //             </form>
 //         </div>
 //     )

@@ -9,10 +9,11 @@ import {
 
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import type { IUser } from "@/utils/types";
 
 
 const RegisterPage = () => {
-	const navigate  = useNavigate();
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -25,18 +26,25 @@ const RegisterPage = () => {
 	const onSubmit = (data: RegisterFormValues) => {
 		console.log("Form Data:", data);
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
+		const isEmailExists = users.some((user:IUser) => user.email === data.email);
+		if (isEmailExists) {
+			alert("Email AllReady Register! ");
+			reset();
+			return;
+		}
+
 		users.push(data);
 		localStorage.setItem("users", JSON.stringify(users));
 		toast.success("Register Successful");
+
 		
-		reset();
 		// navigate to login page
 		navigate("/login");
 	};
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)] dark:text-black ">
-			<div className="w-96 bg-gray-100 p-6 rounded flex flex-col gap-10">
+			<div className="register-theme bg-background text-text  w-96 p-6 rounded flex flex-col gap-10">
 				<h1 className="text-center text-2xl font-bold">Register</h1>
 				<div>
 					<form
@@ -75,7 +83,7 @@ const RegisterPage = () => {
 								{...register("confirmPassword")}
 							/>
 						</div>
-						<Button type="submit" className="font-bold">Register</Button>	
+						<Button type="submit" className="font-bold">Register</Button>
 					</form>
 				</div>
 			</div>

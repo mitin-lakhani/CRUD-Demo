@@ -1,22 +1,21 @@
 import { useAppState } from "@/utils/useAppState"
-const DashboardPage = () => {	
+import { useNavigate } from "react-router-dom";
+
+const DashboardPage = () => {
 	const [state] = useAppState();
 	const user = state.user;
-		
+	const navigate = useNavigate();	
 	return (
-		<div className="h-full  bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 transition-colors">
-			
+
+		<div className= "h-full dashboard-theme  bg-background dark:text-gray-50 p-4 transition-colors">
 			{/* Header */}
-			<div className="flex justify-between items-center mb-6">
-				<h1 className="text-2xl font-bold">Dashboard</h1>
-
+			<div className="flex  justify-between items-center mb-6">
+				<h1 className="text-2xl font-bold heading-theme text-text">Dashboard</h1>
 			</div>
-
 			{/* Grid */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				
 				{/* User Card */}
-				<div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 flex flex-col items-center text-center">
+				<div className=" dark:bg-gray-800 rounded-xl shadow-md p-6 flex flex-col items-center text-center">
 					<img
 						src={user?.images || "src/assets/react.svg"}
 						className="w-24 h-24 rounded-full mb-4"
@@ -26,16 +25,15 @@ const DashboardPage = () => {
 					{/* <p className="text-gray-500 dark:text-gray-400">{user.role}</p> */}
 
 					{/* <span className="mt-3 px-3 py-1 rounded-full text-sm bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300">
-						{user.status}
-					</span> */}
+							{user.status}
+						</span> */}
 
-					<button className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
-						View Profile
+					<button onClick={() => navigate('/viewprofile')} className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+						ViewProfile
 					</button>
 				</div>
-
 				{/* Details Board */}
-				<div className="md:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+				<div className="md:col-span-2  dark:bg-gray-800 rounded-xl shadow-md p-6">
 					<h3 className="text-lg font-semibold mb-4">User Information</h3>
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -59,6 +57,7 @@ const DashboardPage = () => {
 				</div>
 
 			</div>
+
 		</div>
 	);
 };

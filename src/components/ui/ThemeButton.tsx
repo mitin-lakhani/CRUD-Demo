@@ -1,23 +1,20 @@
-import {useState } from "react";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { useTheme } from "@/context/ThemeContext";
+
 const ThemeButton = () => {
-  const [theme, setTheme] = useState('');
+  const { theme, toggleTheme } = useTheme();
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };    
   return (
-    <button onClick={toggleTheme}>
-      {theme === "light" ? <MdDarkMode/>: <MdOutlineLightMode/>}
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full
+        bg-gray-200 dark:bg-neutral-700
+        text-gray-900 dark:text-gray-100"
+    >
+      {theme === "light" ? <MdDarkMode /> : <MdOutlineLightMode />}
     </button>
   );
 };
-export default ThemeButton;
 
+export default ThemeButton;
+  

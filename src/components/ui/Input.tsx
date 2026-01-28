@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 		return (
 			<div className="flex flex-col items-start justify-start w-full gap-1">
 				{label ? (
-					<label className="text-sm font-medium">{label}</label>
+					<label className="text-sm label-theme text-text font-medium">{label}</label>
 				) : (
 					""
 				)}
@@ -21,11 +21,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 						ref={ref}
 						{...props}
 						type={type}
-					
-						className={`w-full border px-3 py-2 rounded ${className}`}
+						
+						className={` w-full border px-3 py-2 text-text rounded ${className}`}
 					/>
-					<span
-						className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+					<span	
+						className="absolute  right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
 						onClick={() =>
 							type === "password"
 								? setType("text")
@@ -34,8 +34,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					>
 						{props.type === "password"
 							? type === "password"	
-								? <BiHide className="text-green-600" size={20} />
-								: <BiShow className="text-red-500" size={20} />
+								? <BiHide className="hide-theme text-text" size={20} />
+								: <BiShow className="show-theme text-text" size={20} />
 							: ""}
 					</span>
 				</div>

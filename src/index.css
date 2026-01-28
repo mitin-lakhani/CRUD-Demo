@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+:root {
+  --primary: #145d99;
+  --background: #cfcfcf;
+  --text: #1f1f1f;
+   --card: #e0f2fe;
+   --border-bottom:#ffffff;
+}
+
+.dark {
+  --primary: #891499;
+  --background: #1f1f1f;
+  --text: #cfcfcf;
+   --card: #1e293b;
+   --border-bottom:#ffffff;
+
+ } 
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+  --color-text: var(--text);
+   --color-card: var(--card);
+}
+
+.login-theme {
+  --primary: #145d99;
+  --background: #f9fafb;
+  --text: #111827;
+}
+
+/* Dark mode ONLY affects login form */
+.dark .login-theme {
+  --primary: #c084fc;
+  --background: #1f2937;
+  --text: #f9fafb;
+
+}
+.register-theme{
+  --primary: #145d99;
+  --background: #f9fafb;
+  --text: #111827;
+}
+
+/* Dark mode ONLY affects login form */
+.dark .register-theme{
+  --primary: #c084fc;
+  --background: #1f2937;
+  --text: #f9fafb;
+
+}
+.hide-theme{
+  --text:#ff0000;
+}
+.show-theme{
+  --text:#00ff00;
+}
+ .dark .button-theme{
+  --text:#ffff;
+  --background:#5a5858;
+}
+ .dark .label-theme{
+  --text:#d2d2d2;
+}
+.dark .dashboard-theme{
+  --primary:#ffff;
+  --text:#000000;
+
+}
+ .dark .users-theme{
+  --primary:#000000;
+  --text:white;
+ }
+ .dark .viewProfile-theme{
+  --text:white;
+ }
+ .dark .card-theme{
+  --text:#ffffff;
+ }
+.dark .heading-theme{
+  --text:#ffffff;
+}
+
+

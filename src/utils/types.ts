@@ -1,13 +1,13 @@
 export interface IUser {
-	id: number;
-	name: string;
-	email: string;
-	password: string;
-	confirmPassword:string;
-	images:"src/assets/react.svg";
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  images:string;
 }
 export interface UserTableProps {
-	users: IUser[];
-	onEdit: (user: IUser) => void;
-	onDelete: (email: string) => void;
+  users: IUser[];
+  onEdit: (user: IUser) => void;
+  onDelete: (email: string) => void;
 }

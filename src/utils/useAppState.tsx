@@ -104,7 +104,6 @@ export const StateProvider = ({
   const [state, dispatch] = useReducer(
     reducer,
     resolveInitialState(),
-    
   );
 
   // ================== START: Persist Dispatch ==================

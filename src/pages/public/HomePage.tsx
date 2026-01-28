@@ -4,14 +4,14 @@ const HomePage = () => {
 		<div className="w-full">
 
 			{/* HERO SECTION */}
-			<section className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-500 text-white">
+			<section className="bg-background text-text">
 				<div className="max-w-7xl mx-auto px-6 py-24 text-center">
 					<h1 className="text-4xl md:text-6xl font-bold leading-tight">
 						Manage Users Easily <br />
-						<span className="text-yellow-300">Build Faster Apps</span>
+						<span className="text-yellow-100">Build Faster Apps</span>
 					</h1>
 
-					<p className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+					<p className="mt-6 text-lg md:text-xl text-text max-w-2xl mx-auto">
 						A modern user management platform built with React, TypeScript,
 						and Tailwind CSS. Simple. Fast. Scalable.
 					</p>
@@ -28,13 +28,12 @@ const HomePage = () => {
 			</section>
 
 			{/* FEATURES SECTION */}
-			<section className="bg-gray-50 py-20">
-				<div className="max-w-7xl mx-auto px-6">
-					<h2 className="text-3xl font-bold text-center mb-14">
+			<section className="bg-gray-50 text-text py-20">
+				<div className="max-w-7xl mx-auto">
+					<h2 className="text-3xl text-text font-bold text-center mb-14">
 						Why Choose Our Platform?
 					</h2>
-
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-text">
 						{[
 							{
 								title: "Fast Performance",

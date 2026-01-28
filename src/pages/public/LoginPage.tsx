@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useAppState } from "@/utils/useAppState";
 import { useNavigate } from "react-router-dom";
 
+
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const [, dispatch] = useAppState();
@@ -42,7 +43,7 @@ const LoginPage = () => {
 	};
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)] dark:text-black">
-			<div className="w-96 bg-gray-100 p-6 rounded flex flex-col gap-10">
+			<div className="w-96 p-6 rounded flex  flex-col gap-10 login-theme bg-background text-text">
 				<h1 className="text-center font-semibold text-3xl">Login</h1>
 				<div>
 					<form
@@ -55,6 +56,7 @@ const LoginPage = () => {
 								label="Email"
 								errorMsg={errors.email?.message}
 								{...register("email")}
+								
 							/>
 						</div>
 						<div>
@@ -63,6 +65,7 @@ const LoginPage = () => {
 								label="Password"
 								errorMsg={errors.password?.message}
 								{...register("password")}
+								
 							/>
 						</div>
 
