@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner";
 
 const UpdateProfile = () => {
-    const [{ user }] = useAppState();
+    const [{ user },dispatch] = useAppState();
     
     const {
         register,
@@ -54,7 +54,11 @@ const UpdateProfile = () => {
             name: data.name,
             email: data.email,
             password: data.password,
+
         };
+        // dispatch user
+
+        dispatch({user:updatedUser})
 
         //  Save to localStorage    
         localStorage.setItem("users", JSON.stringify(updatedUsers));
@@ -81,7 +85,6 @@ const UpdateProfile = () => {
                 <div>
                     <Input
                         type="email"
-
                         label="Email"
                         placeholder="Enter user email"
                         {...register("email")}

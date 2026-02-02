@@ -35,14 +35,14 @@ const ChangePassword = () => {
     const updatedUser = {
       ...user,
       password: data.newPassword,
+      
     };
     // Update logged-in user
     localStorage.setItem("user", JSON.stringify(updatedUser));
 
-    // dispatch user
+    // dispatch user 
     dispatch({
-      type:"USER_UPDATE",
-      payload:updatedUser
+      user:updatedUser
     })
 
     // Update users list
