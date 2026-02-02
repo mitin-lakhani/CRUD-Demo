@@ -6,10 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form"
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+
 const UpdateProfile = () => {
     const [{ user }] = useAppState();
-    const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit,
@@ -25,7 +25,7 @@ const UpdateProfile = () => {
             reset({
                 name: user?.name,
                 email: user?.email,
-                password: user?.password
+                password: user?.password,
             })
         }
     }, [user])
@@ -33,17 +33,22 @@ const UpdateProfile = () => {
     const onSubmit = (data: AdduserFormValue) => {
         if (!user?.email) return;
 
-        // 1️⃣ Get all users
+        //  Get all users
         const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-        // 2️⃣ Update user in users array
+         if(user.password !== data.confirmPassword){
+            toast.error("password does not match")
+            return
+        }
+        //  Update user in users array
         const updatedUsers = users.map((u: any) =>
             u.email === user.email
                 ? { ...u, name: data.name, email: data.email, password: data.password }
                 : u
         );
-
-        // 3️⃣ Updated logged-in user
+        // check the password condition
+        
+        //  Updated logged-in user
         const updatedUser = {
             ...user,
             name: data.name,
@@ -51,27 +56,21 @@ const UpdateProfile = () => {
             password: data.password,
         };
 
-        // 4️⃣ Save to localStorage
+        //  Save to localStorage    
         localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-        // 
+
         localStorage.setItem("user", JSON.stringify(updatedUser));
 
         toast.success("Profile updated successfully");
-        navigate("/users");
     };
-
-    
-
-
-
     return (
         <div className="mb-6 border rounded-lg p-4  font-semibold">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             <form className="h-1/2" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <Input
-                        type="name"
+                        type="text"
                         label="Name"
                         placeholder="Enter user name"
                         {...register("name")}
@@ -82,6 +81,7 @@ const UpdateProfile = () => {
                 <div>
                     <Input
                         type="email"
+
                         label="Email"
                         placeholder="Enter user email"
                         {...register("email")}
@@ -107,14 +107,15 @@ const UpdateProfile = () => {
                         errorMsg={errors.confirmPassword?.message}
                     />
                 </div>
+                <button type="submit"
+                    className="bg-indigo-600 text-white px-5 py-2 mt-4 rounded hover:bg-indigo-700 transition"
+
+
+                > Updated
+                </button>
             </form>
             <div className="mt-4 flex gap-3">
-                <button
-                    className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
-                    onClick={handleSubmit(onSubmit)}
 
-                > Update
-                </button>
                 {/* <button
                     onClick={close}
                     className="bg-gray-400 text-white px-5 py-2 rounded hover:bg-gray-500 transition"
