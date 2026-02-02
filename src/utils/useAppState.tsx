@@ -4,27 +4,32 @@ import {
   useContext,
   useEffect,
   useReducer,
-  } from "react";
+} from "react";
 import type { Dispatch, ReactNode, Reducer } from "react";
 import type { IUser } from "./types";
 
+
 // ================== END: Imports ==================
 
+
 // ================== START: Types ==================
+  
 /**
  * Application State Interface
  * Central state management for theme, compare, watchlist, and user functionality
  */
 export interface AppState {
   theme: "light" | "dark" | "system";
-  user: IUser | null; // Full user object from backend
+  user: IUser | null;
+  // Full user object from backend
 }
 // ================== END: Types ==================
 
 // ================== START: Initial State ==================
 export const initialState: AppState = {
   theme: "system",
-  user:null, // Will be populated after login  
+  user: null,
+  // Will be populated after login  
 };
 // ================== END: Initial State ==================
 
@@ -35,9 +40,10 @@ export const initialState: AppState = {
 export const reducer: Reducer<AppState, Partial<AppState>> = (
   state,
   partial,
+
 ) => {
-  return { ...state, ...partial };
-  
+  return { ...state, ...partial, };
+
 };
 // ================== END: Reducer ==================
 
@@ -68,8 +74,8 @@ export const StateProvider = ({
   reducer: Reducer<AppState, Partial<AppState>>;
   initialState: AppState;
   children: ReactNode;
-  
-  
+
+
 }) => {
   // ================== START: Resolve Initial State ==================
   /**
@@ -86,12 +92,16 @@ export const StateProvider = ({
         const storedTheme = localStorage.getItem("theme");
         const storedUser = localStorage.getItem("user");
 
+
         return {
           ...initialState,
           theme: storedTheme
             ? (storedTheme as AppState["theme"])
             : initialState.theme,
-          user: storedUser ? JSON.parse(storedUser):null,
+          user: storedUser ? JSON.parse(storedUser) : null,
+
+
+
         };
       }
     } catch (e) {
@@ -104,6 +114,7 @@ export const StateProvider = ({
   const [state, dispatch] = useReducer(
     reducer,
     resolveInitialState(),
+
   );
 
   // ================== START: Persist Dispatch ==================
@@ -226,6 +237,8 @@ export const useAppState = () => {
       "useAppState must be used within a StateProvider",
     );
   }
+
   return context;
 };
 // ================== END: useAppState Hook ==================
+

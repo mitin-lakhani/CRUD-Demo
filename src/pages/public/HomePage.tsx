@@ -4,11 +4,11 @@ const HomePage = () => {
 		<div className="w-full">
 
 			{/* HERO SECTION */}
-			<section className="bg-background text-text">
+			<section className="bg-background dark:bg-neutral-900 text-text dark:text-gray-100">
 				<div className="max-w-7xl mx-auto px-6 py-24 text-center">
 					<h1 className="text-4xl md:text-6xl font-bold leading-tight">
 						Manage Users Easily <br />
-						<span className="text-yellow-100">Build Faster Apps</span>
+						<span className="text-indigo-600 dark:text-indigo-400">Build Faster Apps</span>
 					</h1>
 
 					<p className="mt-6 text-lg md:text-xl text-text max-w-2xl mx-auto">
@@ -28,9 +28,9 @@ const HomePage = () => {
 			</section>
 
 			{/* FEATURES SECTION */}
-			<section className="bg-gray-50 text-text py-20">
+			<section className="bg-gray-600 text-text py-20">
 				<div className="max-w-7xl mx-auto">
-					<h2 className="text-3xl text-text font-bold text-center mb-14">
+					<h2 className="text-3xl text-text  font-bold text-center mb-14">
 						Why Choose Our Platform?
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-text">
@@ -50,12 +50,12 @@ const HomePage = () => {
 						].map((feature, index) => (
 							<div
 								key={index}
-								className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition"
+								className="bg-background p-8 rounded-xl shadow hover:shadow-xl transition"
 							>
 								<h3 className="text-xl font-semibold mb-3">
 									{feature.title}
 								</h3>
-								<p className="text-gray-600">{feature.desc}</p>
+								<p className="text-text">{feature.desc}</p>
 							</div>
 						))}
 					</div>
@@ -63,7 +63,7 @@ const HomePage = () => {
 			</section>
 
 			{/* STATS SECTION */}
-			<section className="py-20 bg-white">
+			<section className="py-20 bg-background text-text ">
 				<div className="max-w-7xl mx-auto px-6">
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
 						{[
@@ -74,12 +74,12 @@ const HomePage = () => {
 						].map(([value, label]) => (
 							<div
 								key={label}
-								className="p-6 rounded-xl bg-indigo-50 hover:bg-indigo-100 transition"
+								className="p-6 rounded-xl bg-background hover:bg-indigo-100 transition"
 							>
-								<h3 className="text-4xl font-bold text-indigo-600">
+								<h3 className="text-4xl font-bold text-text">
 									{value}
 								</h3>
-								<p className="mt-2 text-gray-600">{label}</p>
+								<p className="mt-2 text-text text-2xl">{label}</p>
 							</div>
 						))}
 					</div>

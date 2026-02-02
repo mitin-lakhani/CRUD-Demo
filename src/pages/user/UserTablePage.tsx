@@ -9,9 +9,8 @@ type UserTableProps = {
   onEdit: (user: IUser) => void;
   users: IUser[];
   setUsers: (users: IUser[]) => void;
-  isLoggedInUser: (user: IUser) => boolean;
 };
-const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers, isLoggedInUser }) => {
+const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers,}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const[{user}]= useAppState();
@@ -20,8 +19,7 @@ const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers, isLogged
 
   const handleDeleteUser = () => {
     if (!currentUser) return;
-    // console.log(currentUser);
-
+    
     const updatedUsers = users.filter(
       (user) => user.email !== currentUser.email,
     );

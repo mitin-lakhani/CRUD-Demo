@@ -25,8 +25,25 @@ export const adduserSchema = z.object({
 		confirmPassword: z.string().min(6),
 		name: z.string().min(3),
 })
+
 export type AdduserFormValue = z.infer<typeof adduserSchema>
 export const isAuthenticated = (): boolean => {
 	const user = localStorage.getItem("currentUser");
 	return !!user; // true if exists
 };
+
+// change password schema
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Current password required"),
+    newPassword: z.string().min(6, "Minimum 6 characters"),
+    confirmPassword: z.string().min(6),
+  })
+  .refine((data) => !data.newPassword ||  data.newPassword === data.confirmPassword, {
+    message: "Password does not match",
+    path: ["confirmPassword"],
+  });
+
+export type ChangePasswordFormValue = z.infer<typeof changePasswordSchema>;
+
+

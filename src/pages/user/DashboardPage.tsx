@@ -2,11 +2,9 @@ import { useAppState } from "@/utils/useAppState"
 import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
-	const [state] = useAppState();
-	const user = state.user;
+	const [{user}] = useAppState();
 	const navigate = useNavigate();	
 	return (
-
 		<div className= "h-full dashboard-theme  bg-background dark:text-gray-50 p-4 transition-colors">
 			{/* Header */}
 			<div className="flex  justify-between items-center mb-6">
@@ -28,7 +26,7 @@ const DashboardPage = () => {
 							{user.status}
 						</span> */}
 
-					<button onClick={() => navigate('/viewprofile')} className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+					<button onClick={() => navigate('/viewprofilePage')} className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
 						ViewProfile
 					</button>
 				</div>
@@ -40,8 +38,6 @@ const DashboardPage = () => {
 						{[
 							["Full Name", user?.name],
 							["Email", user?.email],
-							// ["Role", user.role],
-							// ["Location", user.location],
 						].map(([label, value]) => (
 							<div
 								key={label}

@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
           { path: "/dashboard", element: <Dashboard /> },
           { path: "/users", element: <UserList /> },
            { path: "/products", element: <Products /> },
-          {path:"/viewprofile",element:<ViewProfile/>},
+          {path:"/viewprofilePage",element:<ViewProfile/>},
           // { path: "/users/new", element: <UserForm /> },
           // { path: "/users/:id", element: <UserForm /> },
          
@@ -49,5 +49,6 @@ export const router = createBrowserRouter([
       },
     ],
     // 404 route
+    
   },
 ]);

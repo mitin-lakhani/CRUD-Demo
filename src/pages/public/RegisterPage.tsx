@@ -9,7 +9,6 @@ import {
 
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import type { IUser } from "@/utils/types";
 
 
 const RegisterPage = () => {
@@ -26,19 +25,20 @@ const RegisterPage = () => {
 	const onSubmit = (data: RegisterFormValues) => {
 		console.log("Form Data:", data);
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
-		const isEmailExists = users.some((user:IUser) => user.email === data.email);
+		
+		const isEmailExists = users.some((user:any) => user.email === data.email);
 		if (isEmailExists) {
-			alert("Email AllReady Register! ");
-			reset();
+			alert("Email AllReady Register! ")
 			return;
 		}
-
+		
 		users.push(data);
 		localStorage.setItem("users", JSON.stringify(users));
 		toast.success("Register Successful");
 
 		
 		// navigate to login page
+		reset();	
 		navigate("/login");
 	};
 

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const ChangePassword = () => {
-  const [{ user }] = useAppState();
+  const [{ user },dispatch] = useAppState();
 
   const {
     register,
@@ -21,7 +21,7 @@ const ChangePassword = () => {
   });
 
   const onSubmit = (data: ChangePasswordFormValue) => {
-    // console.log(alert('hello world'))
+    console.log(data);
     if (!user?.email) return;
 
 
@@ -39,14 +39,20 @@ const ChangePassword = () => {
     // Update logged-in user
     localStorage.setItem("user", JSON.stringify(updatedUser));
 
+    // dispatch user
+    dispatch({
+      type:"USER_UPDATE",
+      payload:updatedUser
+    })
+
     // Update users list
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     const updatedUsers = users.map((u: any) =>
       u.id === user.id ? updatedUser : u
     );
-
     localStorage.setItem("users", JSON.stringify(updatedUsers));
+
 
     reset();
     toast.success("Password changed successfully");

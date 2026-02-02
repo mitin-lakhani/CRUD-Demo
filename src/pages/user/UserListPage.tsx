@@ -10,14 +10,6 @@ const UserListPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
   
-  
-  const loggedUser:IUser | null = JSON.parse(localStorage.getItem("loggedUser")||"null");
-
-  // helper function
-
-  const isLoggedInUser = (user:IUser) =>{
-    return loggedUser?.email === user.email;
-  }
 
   // Load users from localStorage
   useEffect(() => {
@@ -31,7 +23,6 @@ const UserListPage: React.FC = () => {
   // handle button click
   const handleEdit = (user: IUser) => {
       setEditingUser(user);
-
   };
 
   // Cancel form
@@ -66,12 +57,10 @@ const UserListPage: React.FC = () => {
           </div>
         )}
         {/* User table */}
-        <UserTable onEdit={handleEdit}
+        <UserTable onEdit={ handleEdit}
          users={users}
           setUsers={setUsers}
-          isLoggedInUser ={isLoggedInUser}
-          
-          />
+         />
       </div>
     </div>
   );

@@ -10,10 +10,12 @@ import type { IUser } from "@/utils/types";
 import { useEffect} from "react";
 
 type UserFormProps = {
-  user: IUser | null;
-  close: () => void;
-  users: IUser[];
+    user: IUser | null;
+    close: () => void;
+    users: IUser[];
   setUsers: (users: IUser[]) => void;
+
+
 };
 
 const UserFormPage: React.FC<UserFormProps> = ({
@@ -99,7 +101,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
         <div>
           <Input
             type="name"
-            label="Name"
+            label="Name"  
             placeholder="Enter user name"
             {...register("name")}
             errorMsg={errors.name?.message}

@@ -1,4 +1,5 @@
 export interface IUser {
+  findIndex(arg0: (userItem: any) => boolean): unknown;
   id: number;
   name: string;
   email: string;

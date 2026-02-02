@@ -32,7 +32,7 @@ const Sidebar = () => {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/users">Users</Link>
           <Link to="/products">Products</Link>
-          {/* <Link to='/viewprofile'>ViewProfile</Link> */}
+          <Link to='/viewprofilePage'>ViewProfile</Link>
         </div>
         <div className="mb-4">
           <Link to="#" onClick={() => logout()}>

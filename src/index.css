@@ -73,7 +73,8 @@
   --text:white;
  }
  .dark .viewProfile-theme{
-  --text:white;
+  --text:#ffffff;
+  --background:#000000;
  }
  .dark .card-theme{
   --text:#ffffff;
