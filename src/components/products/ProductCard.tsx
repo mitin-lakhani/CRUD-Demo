@@ -7,7 +7,7 @@ type ProductCardProps = {
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="w-full max-w-sm border rounded-2xl overflow-hidden shadow-sm hover:shadow-violet-500 transition">
-      
+
       {/* Image */}
       <img
         src={product.image}
@@ -50,7 +50,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         <button
-            className="mt-3 w-full border rounded-md p-2"
+          className="mt-3 w-full border rounded-md p-2"
         >
           Buy Now
         </button>
@@ -58,5 +58,5 @@ const ProductCard = ({ product }: ProductCardProps) => {
     </div>
   );
 };
-
 export default ProductCard;
+
