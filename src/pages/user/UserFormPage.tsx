@@ -25,7 +25,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
   setUsers,
   
 }) => {
-  console.log("user", user);
+ 
   const {
     register,
     handleSubmit,
@@ -45,11 +45,11 @@ const UserFormPage: React.FC<UserFormProps> = ({
   }, [user]);
 
   const onSubmit = (data: AdduserFormValue) => {
-    console.log(users);
+    
     if (user && user.id) {
       const indexEmail = users.findIndex(
         (userItem) => userItem.email === data.email && userItem.id !== user.id,);
-        console.log(indexEmail);
+        // console.log(indexEmail);
 
       if (indexEmail !== -1) {
         toast.error("User with this email already exists");
@@ -79,18 +79,21 @@ const UserFormPage: React.FC<UserFormProps> = ({
         name: data.name,
         email: data.email,
         password: data.password,
-        confirmPassword: data.confirmPassword,
-        images:"src/assets/react.svg"
+        images:'src/assets/react.svg'
       };
-      if (newUser.password !== newUser.confirmPassword) {
+
+      if (newUser.password !== data.confirmPassword) {
         toast.error("can not match password");
         return;
       }
+
       const updatedUsers = [...users,newUser];
       setUsers(updatedUsers);
+       localStorage.setItem("users", JSON.stringify(updatedUsers));
       toast.success("User added successfully");
+     
     }
-    localStorage.setItem("users", JSON.stringify(users));
+    
     reset();
     close();
   };
@@ -102,17 +105,19 @@ const UserFormPage: React.FC<UserFormProps> = ({
           <Input
             type="name"
             label="Name"  
-            placeholder="Enter user name"
+            placeholder="Enter user name" 
             {...register("name")}
             errorMsg={errors.name?.message}
-          />
+          />  
         </div>
         <div>
           <Input
             type="email"
             label="Email"
             placeholder="Enter user email"
-            {...register("email")}
+            {...register("email",{
+              onChange:(e)=> e.target.value = e.target.value.replace(/\s/g,"")
+            })}
             errorMsg={errors.email?.message}
           />
         </div>

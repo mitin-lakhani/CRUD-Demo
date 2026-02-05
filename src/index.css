@@ -6,32 +6,34 @@
   --text: #1f1f1f;
    --card: #e0f2fe;
    --border-bottom:#ffffff;
+   --shadow:#000000;
 }
 
 .dark {
   --primary: #891499;
   --background: #1f1f1f;
-  --text: #cfcfcf;
+  --text: #aa9d9d;
    --card: #1e293b;
-   --border-bottom:#ffffff;
-
+   --border-bottom:#000000;
+   --shadow:#000000;
  } 
-
-@theme inline {
+@theme inline{
   --color-primary: var(--primary);
   --color-background: var(--background);
   --color-text: var(--text);
    --color-card: var(--card);
+   --color-shadow:var(--shadow);
+
 }
 
-.login-theme {
+/* .login-theme {
   --primary: #145d99;
   --background: #f9fafb;
   --text: #111827;
 }
 
 /* Dark mode ONLY affects login form */
-.dark .login-theme {
+/* .dark .login-theme {
   --primary: #c084fc;
   --background: #1f2937;
   --text: #f9fafb;
@@ -41,13 +43,20 @@
   --primary: #145d99;
   --background: #f9fafb;
   --text: #111827;
-}
-
+} */
 /* Dark mode ONLY affects login form */
-.dark .register-theme{
+/* .dark .register-theme{
   --primary: #c084fc;
   --background: #1f2937;
   --text: #f9fafb;
+
+}
+.dark .sidebar{
+  --background:#160d0d20;
+}
+ .sidebar{  
+  --text:white;
+  --background:#001b2a;
 
 }
 .hide-theme{
@@ -79,8 +88,49 @@
  .dark .card-theme{
   --text:#ffffff;
  }
-.dark .heading-theme{
-  --text:#ffffff;
+ .dark .heading{
+  --text:rgb(0, 128, 187);
 }
+.heading{
+  --text:white;
+}
+.dark .header{
+  --background:#000000;
+  --text:white;
+}
+.header{
+  --background:#010616c4;
+  --text:white;
+}
+.dark .cta{
+  --background:#1a062c;
+  --text:rgb(255, 243, 243);
+}
+.cta{ 
+  --background:#676767;
+  --text:rgb(227, 203, 203);
+}
+.dark .btn{
+  --background:#00aaff;
+  --text:rgb(255, 255, 255);
+}
+.btn{
+  --background:#25222e;
+  --text:white;
+}
+.dark .herosection{
+  --background:#000000;
+  --text:white;
+}
+.herosection{
+  --background:#202541;
+}
+.dark .feature{
+  --background:#00272c;
+}
+.feature{
+  --background:#000b2c;
+  --text:white;
+} */
 
 

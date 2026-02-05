@@ -4,23 +4,23 @@ const HomePage = () => {
 		<div className="w-full">
 
 			{/* HERO SECTION */}
-			<section className="bg-background dark:bg-neutral-900 text-text dark:text-gray-100">
-				<div className="max-w-7xl mx-auto px-6 py-24 text-center">
-					<h1 className="text-4xl md:text-6xl font-bold leading-tight">
+			<section className="herosection bg-background">
+				<div className="max-w-7xl mx-auto px-6 py-6 text-center">
+					<h1 className="text-4xl heading text-text md:text-6xl font-bold leading-tight">
 						Manage Users Easily <br />
 						<span className="text-indigo-600 dark:text-indigo-400">Build Faster Apps</span>
 					</h1>
 
-					<p className="mt-6 text-lg md:text-xl text-text max-w-2xl mx-auto">
+					<p className="mt-6 text-lg md:text-xl heading text-text max-w-2xl mx-auto">
 						A modern user management platform built with React, TypeScript,
 						and Tailwind CSS. Simple. Fast. Scalable.
 					</p>
 
 					<div className="mt-10 flex justify-center gap-4 flex-wrap">
-						<button className="bg-white text-indigo-700 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition">
+						<button className=" btn cursor-pointer border hover:bg-white text-text px-8 py-3 rounded-lg font-bold hover:scale-105 transition">
 							Get Started
 						</button>
-						<button className="border border-white px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-700 transition">
+						<button className="border cursor-pointer font-bold  text-text border-white px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-700 transition">
 							Learn More
 						</button>
 					</div>
@@ -28,12 +28,12 @@ const HomePage = () => {
 			</section>
 
 			{/* FEATURES SECTION */}
-			<section className="bg-gray-600 text-text py-20">
+			<section className="bg-background text-text mt-10">
 				<div className="max-w-7xl mx-auto">
-					<h2 className="text-3xl text-text  font-bold text-center mb-14">
+					<h2 className="text-3xl heading  text-text font-bold text-center mb-14">
 						Why Choose Our Platform?
 					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-text">
+					<div className="grid grid-cols-1 md:grid-cols-3 px-10 gap-8 text-text">
 						{[
 							{
 								title: "Fast Performance",
@@ -50,7 +50,7 @@ const HomePage = () => {
 						].map((feature, index) => (
 							<div
 								key={index}
-								className="bg-background p-8 rounded-xl shadow hover:shadow-xl transition"
+								className="bg-background p-8 rounded-xl shadow-xl shadow-black transition"
 							>
 								<h3 className="text-xl font-semibold mb-3">
 									{feature.title}
@@ -63,9 +63,9 @@ const HomePage = () => {
 			</section>
 
 			{/* STATS SECTION */}
-			<section className="py-20 bg-background text-text ">
+			<section className="  py-10 sm:my-10 bg-background text-text ">
 				<div className="max-w-7xl mx-auto px-6">
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 md:gap-8 text-center">
 						{[
 							["10k+", "Active Users"],
 							["99.9%", "Uptime"],
@@ -74,9 +74,9 @@ const HomePage = () => {
 						].map(([value, label]) => (
 							<div
 								key={label}
-								className="p-6 rounded-xl bg-background hover:bg-indigo-100 transition"
+								className="p-6 rounded-xl bg-background  hover:bg-indigo-50 transition"
 							>
-								<h3 className="text-4xl font-bold text-text">
+								<h3 className="text-4xl font-bold text-text ">
 									{value}
 								</h3>
 								<p className="mt-2 text-text text-2xl">{label}</p>
@@ -87,16 +87,16 @@ const HomePage = () => {
 			</section>
 
 			{/* CALL TO ACTION */}
-			<section className="bg-indigo-700 text-white py-20">
+			<section className=" py-7  bg-background text-white">
 				<div className="max-w-5xl mx-auto px-6 text-center">
-					<h2 className="text-3xl md:text-4xl font-bold">
+					<h2 className="text-3xl cta text-text md:text-4xl font-bold">
 						Start Building Today 🚀
 					</h2>
-					<p className="mt-4 text-white/90 text-lg">
+					<p className="mt-4 heading text-text  text-lg">
 						Create modern web apps with better UX and scalable architecture.
 					</p>
 
-					<button className="mt-8 bg-white text-indigo-700 px-10 py-3 rounded-lg font-semibold hover:scale-105 transition">
+					<button className="mt-8 cursor-pointer border font-bold hover:bg-white text-text  px-10 py-3 rounded-lg  hover:scale-105 transition">
 							Dashboard
 					</button>
 				</div>

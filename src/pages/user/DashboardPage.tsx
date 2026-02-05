@@ -5,7 +5,7 @@ const DashboardPage = () => {
 	const [{user}] = useAppState();
 	const navigate = useNavigate();	
 	return (
-		<div className= "h-full dashboard-theme  bg-background dark:text-gray-50 p-4 transition-colors">
+		<div className= "h-full ml-50 dashboard-theme  bg-background dark:text-gray-50 p-4">
 			{/* Header */}
 			<div className="flex  justify-between items-center mb-6">
 				<h1 className="text-2xl font-bold heading-theme text-text">Dashboard</h1>
@@ -13,7 +13,7 @@ const DashboardPage = () => {
 			{/* Grid */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{/* User Card */}
-				<div className=" dark:bg-gray-800 rounded-xl shadow-md p-6 flex flex-col items-center text-center">
+				<div className="border bg-background text-text rounded-xl shadow-md p-6 flex flex-col items-center text-center">
 					<img
 						src={user?.images || "src/assets/react.svg"}
 						className="w-24 h-24 rounded-full mb-4"
@@ -31,19 +31,19 @@ const DashboardPage = () => {
 					</button>
 				</div>
 				{/* Details Board */}
-				<div className="md:col-span-2  dark:bg-gray-800 rounded-xl shadow-md p-6">
-					<h3 className="text-lg font-semibold mb-4">User Information</h3>
+				<div className="md:col-span-2 bg-background text-text rounded-xl shadow-md p-6 border">
+					<h3 className="text-lg bg-background text-text font-semibold mb-4">User Information</h3>
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						{[
+						{[ 
 							["Full Name", user?.name],
 							["Email", user?.email],
 						].map(([label, value]) => (
 							<div
 								key={label}
-								className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
+								className="bg-background text-text p-4  rounded-lg font-bold"
 							>
-								<p className="text-sm text-gray-500 dark:text-gray-300">
+								<p className="text-sm bg-background text-text mb-3">
 									{label}
 								</p>
 								<p className="font-medium">{value}</p>

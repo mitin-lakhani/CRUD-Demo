@@ -11,7 +11,7 @@ export const registerSchema = z
 		email: z.string().email(),
 		password: z.string().min(6),
 		confirmPassword: z.string().min(6),
-		name: z.string().min(3),
+		name: z.string().min(3).regex(/^[a-zA-Z ]+$/,"Only letters and spaces allowed"),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Passwords do not match",
@@ -25,7 +25,6 @@ export const adduserSchema = z.object({
 		confirmPassword: z.string().min(6),
 		name: z.string().min(3),
 })
-
 export type AdduserFormValue = z.infer<typeof adduserSchema>
 export const isAuthenticated = (): boolean => {
 	const user = localStorage.getItem("currentUser");
@@ -45,5 +44,3 @@ export const changePasswordSchema = z
   });
 
 export type ChangePasswordFormValue = z.infer<typeof changePasswordSchema>;
-
-

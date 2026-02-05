@@ -1,194 +1,66 @@
-function Products() {
+// import ProductCard from "@/components/products/ProductCard";
+// import { products} from "@/utils/products";
+
+import ProductCard from "@/components/products/ProductCard";
+import type { Product } from "@/utils/types";
+import { useEffect, useState } from "react";
+
+
+// show product using create typescript objects..
+// const Products = ()=>{
+//     return (
+//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 place-items-center mt-3 md:mt-5 p-4">
+//         {products.map((item)=>(
+//             <ProductCard 
+//                  product={item}
+//             />
+//         ))}
+//         </div>
+//     );
+// }
+
+// export default Products;
+
+// show product list using api
+
+const Products = () => {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+         fetch("https://fakestoreapi.com/products")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch Products");
+                }
+                return res.json();
+            })
+            .then((data) => {
+                const formmatedData: Product[] = data.map((item: any) => ({
+                    id: item.id,
+                    title: item.title,
+                    price: item.price,  
+                    category: item.category,
+                    qty: 10,
+                    image: item.image,
+
+                }));
+                setProducts(formmatedData);
+                setLoading(true);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
+    if (error) return <p className="text-center text-red-500">{error}</p>;
+
     return (
-        <div className="grid grid-cols-4 mt-5  p-4">
-            <div className="w-80 border  rounded-2xl overflow-hidden shadow-sm hover:shadow-violet-500 transition ">
-
-                {/* Image */}
-                <img
-                    src="src/assets/product-1.jpg"
-                    className="w-full h-48 object-cover"
-                    alt="product"
-                />
-
-                {/* Content */}
-                <div className="p-4 space-y-3 card bg-background text-text">
-
-                    {/* Title */}
-                    <h3 className="font-semibold text-lg text-text card">
-                        technology 
-                    </h3>
-
-                    {/* Price & Category */}
-                    <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600">
-                             Rs. 200
-                        </span>
-
-                        <select className="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option className="text-black">All Categories</option>
-                            <option className="text-black">Electronics</option>
-                            <option className="text-black">Clothing</option>
-                            <option className="text-black">Furniture</option>
-                        </select>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-200 card text-text" />
-
-                    {/* Available Quantity */}
-                    <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium  card text-text">
-                            Available Qty
-                        </span>
-                        <span className="font-bold text-blue-600 text-lg">
-                            25
-                        </span>
-                    </div>
-                    <button className="border rounded-md p-1 cursor-pointer w-full card text-text ">Buy Now</button>
-                </div>
-            </div>
-            <div className="w-80 border rounded-2xl overflow-hidden shadow-sm hover:shadow-violet-500 transition">
-
-                {/* Image */}
-                <img
-                    src="src/assets/product-1.jpg"
-                    className="w-full h-48 object-cover"
-                    alt="product"
-                />
-
-                {/* Content */}
-                <div className="p-4 space-y-3">
-
-                    {/* Title */}
-                    <h3 className="font-semibold text-lg card text-text">
-                        This Product
-                    </h3>
-
-                    {/* Price & Category */}
-                    <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600">
-                             Rs. 700
-                        </span>
-
-                        <select className="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option className="text-black">All Categories</option>
-                            <option className="text-black">Electronics</option>
-                            <option className="text-black">Clothing</option>
-                            <option className="text-black">Furniture</option>
-                        </select>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-200 " />
-
-                    {/* Available Quantity */}
-                    <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium  card text-text">
-                            Available Qty
-                        </span>
-                        <span className="font-bold text-blue-600 text-lg">
-                            25
-                        </span>
-                    </div>
-                    <button className="border w-full rounded-md p-1 cursor-pointer">Buy Now</button>
-
-                </div>
-            </div>
-            <div className="w-80 border rounded-2xl overflow-hidden shadow-sm hover:shadow-violet-500 transition">
-
-                {/* Image */}
-                <img
-                    src="src/assets/product-1.jpg"
-                    className="w-full h-48 object-cover"
-                    alt="product"
-                />
-
-                {/* Content */}
-                <div className="p-4 space-y-3">
-
-                    {/* Title */}
-                    <h3 className="font-semibold text-lg  card text-text ">
-                        This Product
-                    </h3>
-
-                    {/* Price & Category */}
-                    <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600">
-                         Rs. 100
-                        </span>
-
-                        <select className="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option className="text-black">All Categories</option>
-                            <option className="text-black">Electronics</option>
-                            <option className="text-black">Clothing</option>
-                            <option className="text-black">Furniture</option>
-                        </select>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-200" />
-
-                    {/* Available Quantity */}
-                    <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium card text-text">
-                            Available Qty
-                        </span>
-                        <span className="font-bold text-blue-600 text-lg">
-                            25
-                        </span>
-                    </div>
-                    <button className="border w-full rounded-md p-1 cursor-pointer">Buy Now</button>
-
-                </div>
-            </div>
-            <div className="w-80 border rounded-2xl overflow-hidden shadow-sm hover:shadow-violet-500 transition">
-
-                {/* Image */}
-                <img
-                    src="src/assets/product-1.jpg"
-                    className="w-full h-48 object-cover"
-                    alt="product"
-                />
-
-                {/* Content */}
-                <div className="p-4 space-y-3">
-
-                    {/* Title */}
-                    <h3 className="font-semibold text-lg card text-text">
-                        This Product
-                    </h3>
-
-                    {/* Price & Category */}
-                    <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600">
-                            Rs.300
-                        </span>
-
-                        <select className="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option className="text-black">All Categories</option>
-                            <option className="text-black">Electronics</option>
-                            <option className="text-black">Clothing</option>
-                            <option className="text-black">Furniture</option>
-                        </select>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gray-200" />
-
-                    {/* Available Quantity */}
-                    <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium card text-text">
-                            Available Qty
-                        </span>
-                        <span className="font-bold text-blue-600 text-lg">
-                            25
-                        </span>
-                    </div>
-                    <button className="border w-full  rounded-md p-1 cursor-pointer">Buy Now</button>
-
-                </div>
-            </div>
-
+        <div className="ml-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center mt-3 md:mt-5 p-4">
+            {products.map((product)=>(
+                <ProductCard product={product} />
+            ))}
         </div>
     )
 }

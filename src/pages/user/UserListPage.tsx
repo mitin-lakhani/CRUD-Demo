@@ -31,9 +31,9 @@ const UserListPage: React.FC = () => {
     setEditingUser(null);
   };
   return (
-    <div className="h-full  p-6 ">
-      <div className="max-w-5xl mx-auto rounded-xl shadow-lg p-6 users-theme ">
-        <h1 className="text-3xl font-bold text-center mb-6  text-indigo-600">
+    <div className="h-full   p-6 ">
+      <div className="max-w-2xs md:max-w-5xl mx-auto rounded-xl shadow-lg p-6">
+        <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
           User Management
         </h1>
         {/* Form */}

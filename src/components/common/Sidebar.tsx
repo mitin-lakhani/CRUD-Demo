@@ -3,6 +3,7 @@ import { useAppState } from "@/utils/useAppState";
 import ThemeButton from "../ui/ThemeButton";
 
 
+
 const Sidebar = () => {
   // const navigate = useNavigate();
   const [{ user }, dispatch] = useAppState();
@@ -13,20 +14,20 @@ const Sidebar = () => {
     localStorage.removeItem("user");
     navigate("/login");
   };
+
   return (
-    <div className="bg-gray-900 border-b text-white font-semibold  border-gray-300  h-[calc(100dvh)] flex flex-col items-center gap-10">
+    <div className=" bg-background text-text border-b  font-semibold  border-gray-300 sm: h-[calc(100dvh)] flex flex-col items-center gap-10">
    
       <div className="p-4 w-full flex justify-between ">
         <img
           className="object-center h-full w-1/3 rounded-full border "
           src="src/assets/logo.png"
           alt=""
-        /> <button ><ThemeButton/></button>
-          </div>
-         
-      <div
+        /> <button className="w-1/3"><ThemeButton/></button>
+          </div>  
+        <div
         className="w-full h-full px-4 flex gap-4 items-start justify-between
-			 flex-col"
+			   flex-col"
       >
         <div className="flex flex-col gap-8">
           <Link to="/dashboard">Dashboard</Link>

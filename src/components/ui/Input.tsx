@@ -12,7 +12,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 		return (
 			<div className="flex flex-col items-start justify-start w-full gap-1">
 				{label ? (
-					<label className="text-sm label-theme text-text font-medium">{label}</label>
+					<label className="text-sm label-theme font-bold text-text
+					">{label}</label>
 				) : (
 					""
 				)}

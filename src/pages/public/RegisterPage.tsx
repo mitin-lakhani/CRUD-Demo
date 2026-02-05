@@ -20,58 +20,74 @@ const RegisterPage = () => {
 		reset,
 	} = useForm<RegisterFormValues>({
 		resolver: zodResolver(registerSchema),
-	});
 
+	});
 	const onSubmit = (data: RegisterFormValues) => {
-		console.log("Form Data:", data);
+
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
-		
-		const isEmailExists = users.some((user:any) => user.email === data.email);
+
+		const isEmailExists = users.some(
+			(user: any) => user.email === data.email
+		);
+
 		if (isEmailExists) {
-			alert("Email AllReady Register! ")
+			toast.error("Email Already Registered!");
 			return;
 		}
-		
-		users.push(data);
+
+		// confirmPassword remove
+		const { confirmPassword, ...userData } = data;
+
+		users.push(userData);
 		localStorage.setItem("users", JSON.stringify(users));
+
 		toast.success("Register Successful");
 
-		
-		// navigate to login page
-		reset();	
+		reset();
 		navigate("/login");
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)] dark:text-black ">
-			<div className="register-theme bg-background text-text  w-96 p-6 rounded flex flex-col gap-10">
+		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)]  dark:text-black ">
+			<div className="register-theme border bg-background text-text  sm:w-90 my-10 p-6 rounded flex flex-col gap-10">
 				<h1 className="text-center text-2xl font-bold">Register</h1>
 				<div>
-					<form
+					<form	
 						onSubmit={handleSubmit(onSubmit)}
 						className="flex flex-col gap-4"
 					>
 						<div>
 							<Input
 								type="text"
-								label="Name"
+								label="UserName"
+								placeholder="Enter UserName"
 								errorMsg={errors.name?.message}
-								{...register("name")}
+								className="font-medium"
+								{...register("name",)}
 							/>
+
 						</div>
 						<div>
 							<Input
 								type="text"
 								label="Email"
+								placeholder="Enter Email"
 								errorMsg={errors.email?.message}
-								{...register("email")}
+								className="font-medium"
+								{...register("email",{
+									onChange:(e) =>{
+										e.target.value = e.target.value.replace(/\s/g,"")
+									}
+								})}
 							/>
 						</div>
 						<div>
 							<Input
 								type="password"
 								label="Password"
+								placeholder="Enter Password"
 								errorMsg={errors.password?.message}
+								className="font-medium"
 								{...register("password")}
 							/>
 						</div>
@@ -79,6 +95,8 @@ const RegisterPage = () => {
 							<Input
 								type="password"
 								label="Confirm Password"
+								placeholder="Confirm Password"
+								className="font-medium"
 								errorMsg={errors.confirmPassword?.message}
 								{...register("confirmPassword")}
 							/>

@@ -8,6 +8,7 @@ import Products from "./pages/user/ProductsPage";
 import { AuthLayout } from "./components/layouts/AuthLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import ViewProfile from "./pages/user/ViewProfilePage";
+import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
 // import EditUser from "./pages/user/EditUser";
 
 const Home = lazy(() => import("@/pages/public/HomePage"));
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
             children: [
               { path: "/login", element: <Login /> },
               { path: "/register", element: <Register /> },
+              {path:"/forget-password",element:<ForgotPassword/>}
             ],
           },
           { path: "*", element: <NotFoundPage /> },

@@ -30,7 +30,7 @@ const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers,}) => {
   };
   return (
     <div className="overflow-x-auto font-bold">
-      <table className="w-full border bg  rounded-lg overflow-hidden text-center">
+      <table className="md:w-full border bg  rounded-lg overflow-hidden text-center">
         <thead className="bg-indigo-600 text-white">
           <tr>
             <th className="p-3">Id</th>

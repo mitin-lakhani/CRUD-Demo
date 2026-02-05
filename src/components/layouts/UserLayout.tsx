@@ -11,10 +11,10 @@ export const UserLayout = () => {
 	}
 	return (
 		<div className="flex w-full">
-			<div className="w-50">
+			<div className="w-50 fixed">
 				<Sidebar/>
 			</div>
-			<div className="w-[calc(100%)]">	
+			<div className="w-[calc(100%)] ">	
 				<Outlet />
 			</div>
 		</div>
