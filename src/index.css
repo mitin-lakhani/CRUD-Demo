@@ -6,7 +6,7 @@
   --text: #1f1f1f;
    --card: #e0f2fe;
    --border-bottom:#ffffff;
-   --shadow:#000000;
+   --shadow:#afafaf;
 }
 
 .dark {
@@ -15,7 +15,7 @@
   --text: #aa9d9d;
    --card: #1e293b;
    --border-bottom:#000000;
-   --shadow:#000000;
+   --shadow:#090f24;
  } 
 @theme inline{
   --color-primary: var(--primary);

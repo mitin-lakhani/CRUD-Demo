@@ -22,22 +22,21 @@ const UpdateProfile = () => {
         if (user) {
             reset({
                 name: user?.name,
-                email: user?.email,
-                password: user?.password,
-                
+                email: user?.email,                
             })
         }
     }, [user])
 
     const onSubmit = (data: AdduserFormValue) => {
         console.log("submitted:", data);
-
-        if (!user?.email) return;
-
+        if(!user) return;   
         const users = JSON.parse(localStorage.getItem("users") || "[]");
 
+        const oldEmail = user.email;
+        console.log("localstorage user",users);
+
         const updatedUsers = users.map((u: any) =>
-            u.email === user.email
+            u.email === oldEmail
                 ? { ...u, name: data.name, email: data.email }
                 : u
         );
@@ -46,9 +45,11 @@ const UpdateProfile = () => {
             name: data.name,
             email: data.email,
         };
-        dispatch({ user: updatedUser });
+        dispatch({user:updatedUser });
         localStorage.setItem("users", JSON.stringify(updatedUsers));
+        localStorage.setItem('user',JSON.stringify(updatedUser));
 
+        console.log('updated user',updatedUser);
         toast.success("Profile updated successfully");
     };
 
@@ -66,7 +67,11 @@ const UpdateProfile = () => {
                 <div>
                     <Input
                         label="Email"   
-                        {...register("email")}
+                        {...register("email",{
+                            onChange:(e)=>{
+                                e.target.value = e.target.value.replace(/\s/g,"")
+                            }
+                        })}
                     />
                 </div>
                 <button type="submit"

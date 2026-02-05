@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { useAppState } from "@/utils/useAppState";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const [, dispatch] = useAppState();
@@ -20,6 +19,7 @@ const LoginPage = () => {
 		resolver: zodResolver(loginSchema),
 
 	});
+	
 	const onSubmit = (data: LoginFormValues) => {
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
 		const user = users.find((user: any) => user.email === data.email);
@@ -50,6 +50,11 @@ const LoginPage = () => {
 				<div>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
+						onKeyDown={(e)=>{
+							if(e.key === 'Enter'){
+								e.preventDefault();
+							}
+						}}
 						className="flex flex-col gap-4"
 					>
 						<div>
@@ -74,6 +79,7 @@ const LoginPage = () => {
 								placeholder="Enter Password"
 								className="font-bold"
 								errorMsg={errors.password?.message}
+
 								{...register("password")}
 								
 							/>
@@ -81,7 +87,7 @@ const LoginPage = () => {
 						<div className="flex justify-end text-center">
 							<Link to={'/forget-password'} className="font-bold w-1/2 text-indigo-500">Forget Password</Link>
 						</div>
-						<Button type="submit">Login</Button>
+						<Button type='submit'>Login</Button>
 					</form>
 				</div>
 			</div>

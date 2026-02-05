@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import type { IUser } from "@/utils/types";
 import { useEffect} from "react";
 
+
 type UserFormProps = {
     user: IUser | null;
     close: () => void;
@@ -64,6 +65,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
         return;
       }
       setUsers(users);
+      localStorage.setItem('users',JSON.stringify(users))
       toast.success("User updated successfully");
     } else {
       const index = users.findIndex(
@@ -142,14 +144,14 @@ const UserFormPage: React.FC<UserFormProps> = ({
       </form>
       <div className="mt-4 flex gap-3">
         <button
-          className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+          className="bg-indigo-600 text-white px-5 py-2 cursor-pointer rounded hover:bg-indigo-700 transition"
           onClick={handleSubmit(onSubmit)}
         >
           {user && user.id ? "Update" : "Add"}
         </button>
         <button
           onClick={close}
-          className="bg-gray-400 text-white px-5 py-2 rounded hover:bg-gray-500 transition"
+          className="bg-gray-400 text-white px-5 cursor-pointer py-2 rounded hover:bg-gray-500 transition"
         >
           Cancel
         </button> 

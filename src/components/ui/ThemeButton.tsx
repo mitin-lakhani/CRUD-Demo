@@ -27,7 +27,7 @@ const ThemeButton = () => {
         bg-gray-200 dark:bg-neutral-700
         text-gray-900 dark:text-gray-100"
     >
-      {theme === "light" ? <MdDarkMode /> : <MdOutlineLightMode />}
+      {theme === "light" ? <MdDarkMode  className="cursor-pointer"/> : <MdOutlineLightMode className="cursor-pointer" />}
     </button>
   );
 };

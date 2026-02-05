@@ -62,7 +62,7 @@ const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers,}) => {
                     onClick={() => {
                       onEdit(item);
                     }}
-                    className="bg-amber-700 px-3 rounded-md"
+                    className="bg-amber-700 px-3 rounded-md cursor-pointer"
                   >
                     Edit
                   </button>
@@ -70,7 +70,7 @@ const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers,}) => {
                     onClick={() => {
                       setCurrentUser(item);
                       setIsOpen(true);
-                    }} className="bg-indigo-500 px-2 py-2 rounded-md font-bold">
+                    }} className="bg-indigo-500 px-2 py-2 rounded-md font-bold cursor-pointer">
                     Delete
                   </button>
                   </>

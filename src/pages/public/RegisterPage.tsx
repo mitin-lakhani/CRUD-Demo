@@ -3,8 +3,7 @@ import { Input } from "@/components/ui/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-	registerSchema,
-	type RegisterFormValues,
+	registerSchema, type RegisterFormValues,
 } from "@/validations/auth.schema";
 
 import { toast } from "sonner";
@@ -52,8 +51,13 @@ const RegisterPage = () => {
 			<div className="register-theme border bg-background text-text  sm:w-90 my-10 p-6 rounded flex flex-col gap-10">
 				<h1 className="text-center text-2xl font-bold">Register</h1>
 				<div>
-					<form	
+					<form
 						onSubmit={handleSubmit(onSubmit)}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter') {
+								e.preventDefault();
+							}
+						}}
 						className="flex flex-col gap-4"
 					>
 						<div>
@@ -74,9 +78,9 @@ const RegisterPage = () => {
 								placeholder="Enter Email"
 								errorMsg={errors.email?.message}
 								className="font-medium"
-								{...register("email",{
-									onChange:(e) =>{
-										e.target.value = e.target.value.replace(/\s/g,"")
+								{...register("email", {
+									onChange: (e) => {
+										e.target.value = e.target.value.replace(/\s/g, "")
 									}
 								})}
 							/>

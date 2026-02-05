@@ -41,13 +41,13 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
                 onConfirm();
                 onClose();
               }}
-              className="px-3 py-1 bg-red-600 text-white rounded"
+              className="px-3 py-1 bg-red-600 text-white rounded cursor-pointer"
             >
               {confirmText}
             </button>
             <button
               onClick={onClose}
-              className="px-3 py-1 border rounded text-black"
+              className="px-3 py-1 border rounded text-black cursor-pointer"
             >
               {cancelText}
             </button>

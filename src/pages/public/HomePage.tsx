@@ -20,7 +20,7 @@ const HomePage = () => {
 						<button className=" btn cursor-pointer border hover:bg-white text-text px-8 py-3 rounded-lg font-bold hover:scale-105 transition">
 							Get Started
 						</button>
-						<button className="border cursor-pointer font-bold  text-text border-white px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-700 transition">
+						<button className="border cursor-pointer font-bold  text-text  px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-700 transition">
 							Learn More
 						</button>
 					</div>
@@ -50,7 +50,7 @@ const HomePage = () => {
 						].map((feature, index) => (
 							<div
 								key={index}
-								className="bg-background p-8 rounded-xl shadow-xl shadow-black transition"
+								className="bg-background p-8 rounded-xl shadow-xl shadow-shadow transition"
 							>
 								<h3 className="text-xl font-semibold mb-3">
 									{feature.title}

@@ -37,7 +37,7 @@ const Header = () => {
               </Link>
               <button
                 onClick={logout}
-                className="font-bold hover:text-red-500"
+                className="font-bold hover:text-red-500 cursor-pointer"
               >
                 Logout
               </button>

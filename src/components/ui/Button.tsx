@@ -8,7 +8,7 @@ export const Button = ({...props }: ButtonProps) => {
 	return (
 		<div className="flex flex-col items-start justify-start">
 			<button
-				type={props.type || "button"}
+				type={props.type || "button" || "reset" || "submit"}
 				className={`border px-3 py-2 cursor-pointer block rounded w-full button-theme bg-background font-bold  text-text ${props.className}`}
 			>
 				{props.children}

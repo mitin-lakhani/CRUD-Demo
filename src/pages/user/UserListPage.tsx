@@ -41,7 +41,7 @@ const UserListPage: React.FC = () => {
           <UserFormPage
             user={editingUser}
             close={handleClose}
-            users={users}
+            users={users} 
             setUsers={setUsers}
           />
         )}
@@ -50,7 +50,7 @@ const UserListPage: React.FC = () => {
           <div className="mb-4 text-right">
             <button
               onClick={() => setShowForm(true)}
-              className="bg-green-900 text-white px-3 py-1 rounded hover:bg-green-700"
+              className="bg-green-900 text-white px-3 py-1 cursor-pointer rounded hover:bg-green-700"
             >
               Add User
             </button>

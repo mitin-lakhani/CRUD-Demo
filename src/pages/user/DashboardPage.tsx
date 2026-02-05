@@ -26,7 +26,7 @@ const DashboardPage = () => {
 							{user.status}
 						</span> */}
 
-					<button onClick={() => navigate('/viewprofilePage')} className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+					<button onClick={() => navigate('/viewprofilePage')} className="mt-4 bg-indigo-600 text-white px-4 py-2 cursor-pointer rounded-lg hover:bg-indigo-700 transition">
 						ViewProfile
 					</button>
 				</div>

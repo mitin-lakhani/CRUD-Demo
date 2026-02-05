@@ -50,7 +50,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         <button
-          className="mt-3 w-full border rounded-md p-2"
+          className="mt-3 w-full border rounded-md p-2 cursor-pointer"
         >
           Buy Now
         </button>
