@@ -6,6 +6,7 @@ import { loginSchema, type LoginFormValues } from "@/validations/auth.schema";
 import { toast } from "sonner";
 import { useAppState } from "@/utils/useAppState";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const LoginPage = () => {
 	const navigate = useNavigate();
@@ -19,8 +20,10 @@ const LoginPage = () => {
 		resolver: zodResolver(loginSchema),
 
 	});
-	
+	const[email,setEmail] = useState("");
 	const onSubmit = (data: LoginFormValues) => {
+		const verified = localStorage.setItem("verifiedUser",email);
+
 		const users = JSON.parse(localStorage.getItem("users") || "[]");
 		const user = users.find((user: any) => user.email === data.email);
 		if (!user) {
@@ -33,7 +36,11 @@ const LoginPage = () => {
 			return;
 		}
 		console.log("Form Data:", data);
-		toast.success("Login Successful");
+		if(users.email === verified){
+			toast.success("Login Successful");
+		}else{
+			toast.error("User Not varified");
+		}
 		localStorage.setItem("user", JSON.stringify(user));
 			dispatch({ 
 				user
@@ -67,6 +74,7 @@ const LoginPage = () => {
 								{...register("email",{
 									onChange:(e) =>{
 										e.target.value = e.target.value.replace(/\s/g, "")
+										setEmail(e.target.value);
 									}
 								
 								})}

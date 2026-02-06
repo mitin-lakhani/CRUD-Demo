@@ -9,6 +9,7 @@ import { AuthLayout } from "./components/layouts/AuthLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import ViewProfile from "./pages/user/ViewProfilePage";
 import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
+import SendOtp from "./pages/public/SendOtp";
 // import EditUser from "./pages/user/EditUser";
 
 const Home = lazy(() => import("@/pages/public/HomePage"));
@@ -17,6 +18,8 @@ const Register = lazy(() => import("@/pages/public/RegisterPage"));
 const Dashboard = lazy(() => import("@/pages/user/DashboardPage"));
 const UserList = lazy(() => import("@/pages/user/UserListPage"));
 // const UserForm = lazy(() => import("@/pages/user/UserFormPage"));
+
+
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +34,8 @@ export const router = createBrowserRouter([
             children: [
               { path: "/login", element: <Login /> },
               { path: "/register", element: <Register /> },
-              {path:"/forget-password",element:<ForgotPassword/>}
+              {path:"/forget-password",element:<ForgotPassword/>},
+              {path:"/send-otp",element:<SendOtp/>},
             ],
           },
           { path: "*", element: <NotFoundPage /> },

@@ -8,9 +8,12 @@ import {
 
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const RegisterPage = () => {
+	const [email, setEmail] = useState("");
+
 	const navigate = useNavigate();
 	const {
 		register,
@@ -40,10 +43,15 @@ const RegisterPage = () => {
 		users.push(userData);
 		localStorage.setItem("users", JSON.stringify(users));
 
+		localStorage.setItem("tempUserEmail", email);
+
+		// generate otp
+		const otp = Math.floor(100000 + Math.random() * 900000);
+		localStorage.setItem("otp", otp.toString());
 		toast.success("Register Successful");
 
 		reset();
-		navigate("/login");
+		navigate("/send-otp");
 	};
 
 	return (
@@ -81,6 +89,7 @@ const RegisterPage = () => {
 								{...register("email", {
 									onChange: (e) => {
 										e.target.value = e.target.value.replace(/\s/g, "")
+										setEmail(e.target.value);
 									}
 								})}
 							/>
