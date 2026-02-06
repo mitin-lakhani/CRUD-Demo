@@ -51,7 +51,7 @@ const RegisterPage = () => {
 		toast.success("Register Successful");
 
 		reset();
-		navigate("/send-otp");
+		navigate("/sendotp");
 	};
 
 	return (
