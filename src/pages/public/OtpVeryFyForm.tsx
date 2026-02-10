@@ -26,7 +26,7 @@ const OtpVerifyForm = ({email}:{email:string}) => {
       (user: any) => user.email === email
     );
    
-      if (userIndex === -1) {
+      if (userIndex === -1 ) {
         toast.error("User not found");
         return;
       }

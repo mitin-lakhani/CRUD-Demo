@@ -81,6 +81,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
         name: data.name,
         email: data.email,
         password: data.password,
+        status:"verified",
         images:'src/assets/react.svg'
       };
 
