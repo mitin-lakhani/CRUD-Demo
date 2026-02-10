@@ -1,7 +1,7 @@
 import { useAppState } from "@/utils/useAppState"
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import logo from "@/assets/react.svg";
 const containerVariants = {
 	hidden: { opacity: 0 },
 	show: {
@@ -45,10 +45,10 @@ const DashboardPage = () => {
 			variants={cardVariants}
 		>
 			<img
-				src={user?.images || "src/assets/react.svg"}
-				className="w-24 h-24 rounded-full mb-4"
-				alt="user"
-			/>
+          className="object-center h-full w-1/3 rounded-full"
+          src={logo}
+          alt="logo"
+        />
 			<h2 className="text-xl font-semibold">{user?.name}</h2>
 
 			<button
