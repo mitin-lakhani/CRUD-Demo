@@ -37,10 +37,7 @@ const OtpVerifyForm = ({email}:{email:string}) => {
       localStorage.setItem("users", JSON.stringify(users));
 
       toast.success("Account verified");
-
-      setTimeout(() => {
         navigate("/login");
-      }, 2000);
     } else {
       toast.error("Invalid OTP");
     }

@@ -51,8 +51,6 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
             >
               {cancelText}
             </button>
-
-            
           </div>
         </Dialog.Panel>
       </div>
