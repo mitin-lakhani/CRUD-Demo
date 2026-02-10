@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
-import { email } from "zod";
 
 type ForgotForm = {
   email: string;
