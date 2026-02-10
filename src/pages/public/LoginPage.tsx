@@ -8,6 +8,7 @@ import { useAppState } from "@/utils/useAppState";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const [, dispatch] = useAppState();
@@ -21,25 +22,31 @@ const LoginPage = () => {
 
 	});
 	const[email,setEmail] = useState("");
-	const onSubmit = (data: LoginFormValues) => {
-		const verified = localStorage.setItem("verifiedUser",email);
 
-		const users = JSON.parse(localStorage.getItem("users") || "[]");
-		const user = users.find((user: any) => user.email === data.email);
+	const onSubmit = (data: LoginFormValues) => {
+		console.log("login form values",data);
+	const users = JSON.parse(localStorage.getItem("users") || "[]");
+		
+		const user = users.find((user: any) => user.email === email);
 		if (!user) {
-			toast.error("User not found!");
+			toast.error("Invalid email");
 			return;
 		}
-		
-		if (user.password !== data.password) {
-			toast.error("Incorrect password");
+		if(user.password !== data.password){
+			toast.error("password invalid")
 			return;
 		}
 		console.log("Form Data:", data);
-		if(users.email === verified){
-			toast.success("Login Successful");
+
+		console.log("users email:",user.email)
+		console.log("email is",email)
+		console.log("user status",user.status)
+
+		if(user.email === email && user.status === 'verified'){
+			toast.success("Login Successful",{duration:1500});	
 		}else{
-			toast.error("User Not varified");
+			toast.error("User Not varified",{duration:1500});
+			return;	
 		}
 		localStorage.setItem("user", JSON.stringify(user));
 			dispatch({ 
@@ -57,11 +64,6 @@ const LoginPage = () => {
 				<div>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
-						onKeyDown={(e)=>{
-							if(e.key === 'Enter'){
-								e.preventDefault();
-							}
-						}}
 						className="flex flex-col gap-4"
 					>
 						<div>
@@ -92,13 +94,14 @@ const LoginPage = () => {
 								
 							/>
 						</div>
-						<div className="flex justify-end text-center">
+						<div className="flex justify-between">
+							
 							<Link to={'/forget-password'} className="font-bold w-1/2 text-indigo-500">Forget Password</Link>
 						</div>
 						<Button type='submit'>Login</Button>
 					</form>
 				</div>
-			</div>
+			</div>	
 		</div>
 	);
 };

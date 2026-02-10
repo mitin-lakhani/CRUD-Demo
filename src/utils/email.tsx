@@ -1,13 +1,15 @@
 import emailjs from "@emailjs/browser";
 
 export const sendOtpEmail = (email: any, otp: any) => {
+  console.log('email', email)
   return emailjs.send(
-    "service_zp2fgjj",
-    "template_prhcfbd",
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
     {
-      to_email: email,
-      otp: otp,
+      email,
+      passcode: otp,
+      time: 'asd',
     },
-    "TiL_s0UZoZnO4-eGY"
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
   );  
 };

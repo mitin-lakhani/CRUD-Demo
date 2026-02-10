@@ -1,60 +1,93 @@
 import { useAppState } from "@/utils/useAppState"
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+
+const containerVariants = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+		},
+	},
+};
+
+const cardVariants = {
+	hidden: { opacity: 0, y: 20 },
+	show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const DashboardPage = () => {
 	const [{user}] = useAppState();
 	const navigate = useNavigate();	
 	return (
-		<div className= "h-full ml-50 dashboard-theme  bg-background dark:text-gray-50 p-4">
-			{/* Header */}
-			<div className="flex  justify-between items-center mb-6">
-				<h1 className="text-2xl font-bold heading-theme text-text">Dashboard</h1>
+		<motion.div
+	className="h-full ml-50 dashboard-theme bg-background dark:text-gray-50 p-4"
+	variants={containerVariants}
+	initial="hidden"
+	animate="show"
+>
+	{/* Header */}
+	<motion.div
+		className="flex justify-between items-center mb-6"
+		variants={cardVariants}
+	>
+		<h1 className="text-2xl font-bold heading-theme text-text">
+			Dashboard
+		</h1>
+	</motion.div>
+
+	{/* Grid */}
+	<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+		{/* User Card */}
+		<motion.div
+			className="border bg-background text-text rounded-xl shadow-md p-6 flex flex-col items-center text-center"
+			variants={cardVariants}
+		>
+			<img
+				src={user?.images || "src/assets/react.svg"}
+				className="w-24 h-24 rounded-full mb-4"
+				alt="user"
+			/>
+			<h2 className="text-xl font-semibold">{user?.name}</h2>
+
+			<button
+				onClick={() => navigate("/profile")}
+				className="mt-4 bg-indigo-600 text-white px-4 py-2 cursor-pointer rounded-lg hover:bg-indigo-700 transition"
+			>
+				View Profile
+			</button>
+		</motion.div>
+
+		{/* Details Board */}
+		<motion.div
+			className="md:col-span-2 bg-background text-text rounded-xl shadow-md p-6 border"
+			variants={cardVariants}
+		>
+			<h3 className="text-lg font-semibold mb-4">
+				User Information
+			</h3>
+
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{[
+					["Full Name", user?.name],
+					["Email", user?.email],
+					["Status", user?.status],
+				].map(([label, value]) => (
+					<motion.div
+						key={label}
+						className="bg-background text-text p-4 rounded-lg font-bold"
+						variants={cardVariants}
+					>
+						<p className="text-sm mb-3">{label}</p>
+						<p className="font-medium">{value}</p>
+					</motion.div>
+				))}
 			</div>
-			{/* Grid */}
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{/* User Card */}
-				<div className="border bg-background text-text rounded-xl shadow-md p-6 flex flex-col items-center text-center">
-					<img
-						src={user?.images || "src/assets/react.svg"}
-						className="w-24 h-24 rounded-full mb-4"
-						alt="user"
-					/>
-					<h2 className="text-xl font-semibold">{user?.name}</h2>
-					{/* <p className="text-gray-500 dark:text-gray-400">{user.role}</p> */}
+		</motion.div>
+	</div>
+</motion.div>
 
-					{/* <span className="mt-3 px-3 py-1 rounded-full text-sm bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300">
-							{user.status}
-						</span> */}
-
-					<button onClick={() => navigate('/profile')} className="mt-4 bg-indigo-600 text-white px-4 py-2 cursor-pointer rounded-lg hover:bg-indigo-700 transition">
-						ViewProfile
-					</button>
-				</div>
-				{/* Details Board */}
-				<div className="md:col-span-2 bg-background text-text rounded-xl shadow-md p-6 border">
-					<h3 className="text-lg bg-background text-text font-semibold mb-4">User Information</h3>
-
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						{[ 
-							["Full Name", user?.name],
-							["Email", user?.email],
-						].map(([label, value]) => (
-							<div
-								key={label}
-								className="bg-background text-text p-4  rounded-lg font-bold"
-							>
-								<p className="text-sm bg-background text-text mb-3">
-									{label}
-								</p>
-								<p className="font-medium">{value}</p>
-							</div>
-						))}
-					</div>
-				</div>
-
-			</div>
-
-		</div>
 	);
 };
 

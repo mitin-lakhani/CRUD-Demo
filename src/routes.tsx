@@ -9,7 +9,7 @@ import { AuthLayout } from "./components/layouts/AuthLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import ViewProfile from "./pages/user/ViewProfilePage";
 import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
-import SendOtp from "./pages/public/SendOtp";
+// import SendOtp from "./pages/public/SendOtp";
 // import EditUser from "./pages/user/EditUser";
 
 const Home = lazy(() => import("@/pages/public/HomePage"));
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
               { path: "/login", element: <Login /> },
               { path: "/register", element: <Register /> },
               {path:"/forget-password",element:<ForgotPassword/>},
-              {path:"/sendotp",element:<SendOtp/>},
+              // {path:"/sendotp",element:<SendOtp/>},
             ],
           },
           { path: "*", element: <NotFoundPage /> },

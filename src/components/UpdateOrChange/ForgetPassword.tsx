@@ -19,8 +19,7 @@ const ForgotPassword = () => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     const userIndex = users.findIndex(
-      (u: any) => u.email === data.email
-    );
+      (u:any) => u.email === data.email );
     console.log(userIndex);
     if (userIndex === -1) {
       toast.error("User with this email not found");

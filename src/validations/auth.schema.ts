@@ -12,6 +12,8 @@ export const registerSchema = z
 		password: z.string().min(6),
 		confirmPassword: z.string().min(6),
 		name: z.string().min(3).regex(/^[a-zA-Z ]+$/,"Only letters and spaces allowed"),
+		// otp:z.number(),
+		// status:z.string()
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Passwords do not match",
@@ -44,3 +46,13 @@ export const changePasswordSchema = z
   });
 
 export type ChangePasswordFormValue = z.infer<typeof changePasswordSchema>;
+
+// otp very fy form 
+export const otpSchema = z.object({
+  otp: z
+    .string()
+    .min(6, "OTP must be 6 digits")
+    .max(6, "OTP must be 6 digits").regex(/^[0-9]+$/,"Only numbers allowed")
+});
+
+export type OtpFormValues = z.infer<typeof otpSchema>;

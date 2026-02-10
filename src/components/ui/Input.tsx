@@ -23,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 						{...props}
 						type={type}
 						
-						className={` w-full border px-3 py-2 text-text rounded ${className}`}
+						className={` w-full border px-3 py-2 text-text font-semibold rounded  ${className}`}
 					/>
 					<span	
 						className="absolute  right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"

@@ -4,6 +4,8 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
+  otp:number;
+  status:string;
   images:string;
 }
 export interface UserTableProps {
