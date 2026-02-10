@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { email } from "zod";
 
 type ForgotForm = {
   email: string;
@@ -18,10 +19,10 @@ const ForgotPassword = () => {
   const onSubmit = (data: ForgotForm) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
+
     const userIndex = users.findIndex(
-      (u:any) => u.email === data.email );
-    console.log(userIndex);
-    if (userIndex === -1) {
+      (u:any) => u.email === data.email);
+    if (userIndex === -1 ) {
       toast.error("User with this email not found");
       return;
     }
@@ -55,7 +56,6 @@ const ForgotPassword = () => {
           className="font-semibold"
           {...register("email")}
         />
-
         <Input
           type="password"
           label="New Password"

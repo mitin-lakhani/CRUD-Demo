@@ -1,15 +1,15 @@
 // validations/auth.schema.ts
 import { z } from "zod";
 export const loginSchema = z.object({
-	email: z.string().email(),
+	email: z.string().min(1,"Email is required").email("Enter a valid email address"),
 	password: z.string().min(6),
 });
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export const registerSchema = z
 	.object({
-		email: z.string().email(),
-		password: z.string().min(6),
+		email: z.string().min(1,"minimum 3 character are required").email("email is required"),
+		password: z.string().min(6,"minimum 6 character are required"),
 		confirmPassword: z.string().min(6),
 		name: z.string().min(3).regex(/^[a-zA-Z ]+$/,"Only letters and spaces allowed"),
 		// otp:z.number(),
@@ -22,10 +22,10 @@ export const registerSchema = z
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export const adduserSchema = z.object({
-		email: z.string().email(),
-		password: z.string().min(6),
+		name: z.string().min(3,"minimum 3 character are required"),
+		email: z.string().min(1,"Email is required").email("Enter a valid email address"),
+		password: z.string().min(6,"min 6 character are required"),
 		confirmPassword: z.string().min(6),
-		name: z.string().min(3),
 })
 export type AdduserFormValue = z.infer<typeof adduserSchema>
 export const isAuthenticated = (): boolean => {
