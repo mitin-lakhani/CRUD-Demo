@@ -1,3 +1,4 @@
+
 export interface IUser {
   // findIndex(arg0: (userItem: any) => boolean): unknown;
   id: number;
@@ -12,11 +13,14 @@ export interface UserTableProps {
   onEdit: (user: IUser) => void;
   onDelete: (email: string) => void;
 }
-export type Product = {
+export interface Product{
   id: number;
   title: string;
   price: number;
-  category: string;
+  categories:string;
   qty: number;
   image: string;
 };
+
+
+

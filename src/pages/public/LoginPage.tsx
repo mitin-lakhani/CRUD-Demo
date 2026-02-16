@@ -24,24 +24,20 @@ const LoginPage = () => {
 	const[email,setEmail] = useState("");
 
 	const onSubmit = (data: LoginFormValues) => {
-		console.log("login form values",data);
-	const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+		const users = JSON.parse(localStorage.getItem("users") || "[]");
 		
 		const user = users.find((user: any) => user.email === email);
 		if (!user) {
-			toast.error("Invalid email");
+			toast.error("User Not Found");
 			return;
 		}
 		if(user.password !== data.password){
-			toast.error("password invalid")
-			return;
+			toast.error("password incorrect")
+			return;	
 		}
-		console.log("Form Data:", data);
 
-		console.log("users email:",user.email)
-		console.log("email is",email)
-		console.log("user status",user.status)
-
+		// this code apply for after login and verified user
 		if(user.email === email && user.status === 'verified'){
 			toast.success("Login Successful",{duration:1500});	
 		}else{

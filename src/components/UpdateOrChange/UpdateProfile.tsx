@@ -15,7 +15,7 @@ const UpdateProfile = () => {
         handleSubmit,
         reset,
     } = useForm<AdduserFormValue>({
-
+            
     });
 
     useEffect(() => {

@@ -4,19 +4,22 @@ import { lazy } from "react";
 import { RootLayout } from "./components/layouts/RootLayout";
 import { PublicLayout } from "./components/layouts/PublicLayout";
 import { UserLayout } from "./components/layouts/UserLayout";
-import Products from "./pages/user/ProductsPage";
+// import Products from "./pages/user/ProductsListPage";
 import { AuthLayout } from "./components/layouts/AuthLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import ViewProfile from "./pages/user/ViewProfilePage";
 import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
-// import SendOtp from "./pages/public/SendOtp";
-// import EditUser from "./pages/user/EditUser";
+// import ProductCrudWithApi from "./pages/user/ProductCrudWithApi";
+// import UpdateProduct from "./components/products/UpdateProduct";/
+// import AddProduct from "./components/products/AddProduct";
+
 
 const Home = lazy(() => import("@/pages/public/HomePage"));
 const Login = lazy(() => import("@/pages/public/LoginPage"));
 const Register = lazy(() => import("@/pages/public/RegisterPage"));
 const Dashboard = lazy(() => import("@/pages/user/DashboardPage"));
 const UserList = lazy(() => import("@/pages/user/UserListPage"));
+const Product = lazy(()=>import("@/pages/user/ProductsListPage"))
 // const UserForm = lazy(() => import("@/pages/user/UserFormPage"));
 
 
@@ -46,11 +49,13 @@ export const router = createBrowserRouter([
         children: [
           { path: "/dashboard", element: <Dashboard /> },
           { path: "/users", element: <UserList /> },
-           { path: "/products", element: <Products /> },
+          //  { path: "/products", element: <Products /> },
           {path:"/profile",element:<ViewProfile/>},
+          {path:"/products",element:<Product/>},
+          // {path:"/productcrudapi",element:<ProductCrudWithApi/>}
+          // {path:"/update-product",element:<UpdateProduct/>}
           // { path: "/users/new", element: <UserForm /> },
           // { path: "/users/:id", element: <UserForm /> },
-         
         ],
       },
     ],

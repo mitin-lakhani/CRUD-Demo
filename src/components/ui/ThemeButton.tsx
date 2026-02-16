@@ -20,10 +20,10 @@ const ThemeButton = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
   
-  return (
+  return (  
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-2xl
+      className="p-2 rounded-2xl h-10
         bg-gray-200 dark:bg-neutral-700
         text-gray-900 dark:text-gray-100"
     >

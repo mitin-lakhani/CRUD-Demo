@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ChangePasswordPage from "../../components/UpdateOrChange/ChangePassword";
 import UpdateProfile from "../../components/UpdateOrChange/UpdateProfile";
-
+import logo from "@/assets/updateProfile.png";
 
 const ViewProfilePage = () => {
   const [activeTab, setActiveTab] = useState<"profile" | "password">("profile");
@@ -13,9 +13,9 @@ const ViewProfilePage = () => {
         {/* Profile Image */}
         <div className="flex justify-center mb-4">
           <img
-            src="src/assets/react.svg"
-            className="w-24 h-24 rounded-full border shadow"
-            alt="profile"
+            className="object-center h-full w-1/3 rounded-full"
+            src={logo}
+            alt="profile logo"
           />
         </div>
 

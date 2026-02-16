@@ -56,3 +56,24 @@ export const otpSchema = z.object({
 });
 
 export type OtpFormValues = z.infer<typeof otpSchema>;
+
+// add products schema
+export const productschema = z.object({
+  title: z.string().min(1, "Product name is required"),
+  price: z.number().min(1, "Price required"),
+  qty: z.number().min(1, "Quantity required"),
+  categories:z.string("mendotory one categories are required"),
+  image: z.string().url("Enter valid image URL"),
+});
+export type productFormValues = z.infer<typeof productschema>;
+
+
+// export const productcrudapischema = z.object({
+// 	productname:z.string().min(3,"Name should be >= 3 characters"),
+// 	productprice:z.number("price are required").min(3,"minimum price is greter >=3"),
+// 	productqty:z.number("product qty are required").min(1,"minimum 1 qty are required"),
+// 	// productcategories:z.string("categories are requires"),
+// 	productimage:z.string("image url are required"),
+	
+// })
+// export type ProductCrudApiValues = z.infer<typeof productcrudapischema>;		

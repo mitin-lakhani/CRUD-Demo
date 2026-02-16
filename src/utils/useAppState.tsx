@@ -6,7 +6,7 @@ import {
   useReducer,
 } from "react";
 import type { Dispatch, ReactNode, Reducer } from "react";
-import type { IUser } from "./types";
+import type { IUser, Product } from "./types";
 
 
 // ================== END: Imports ==================
@@ -21,6 +21,7 @@ import type { IUser } from "./types";
 export interface AppState {
   theme: "light" | "dark" | "system";
   user: IUser | null;
+  product : Product | null;
   // Full user object from backend
 }
 // ================== END: Types ==================
@@ -29,6 +30,7 @@ export interface AppState {
 export const initialState: AppState = {
   theme: "system",
   user: null,
+  product:null,
   // Will be populated after login  
 };
 // ================== END: Initial State ==================
@@ -91,7 +93,7 @@ export const StateProvider = ({
       ) {
         const storedTheme = localStorage.getItem("theme");
         const storedUser = localStorage.getItem("user");
-
+        const storeProduct = localStorage.getItem("products");
 
         return {
           ...initialState,
@@ -99,7 +101,7 @@ export const StateProvider = ({
             ? (storedTheme as AppState["theme"])
             : initialState.theme,
           user: storedUser ? JSON.parse(storedUser) : null,
-
+          product:storeProduct ? JSON.parse(storeProduct) : null,
 
 
         };

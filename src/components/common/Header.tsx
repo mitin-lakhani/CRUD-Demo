@@ -29,7 +29,6 @@ const Header = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-4 items-center text-text">
           <Link className="font-bold hover:text-red-500" to="/">Home</Link>
-
           {user ? (
             <>
               <Link className="font-bold hover:text-red-500" to="/dashboard">

@@ -15,8 +15,6 @@ type UserFormProps = {
     close: () => void;
     users: IUser[];
   setUsers: (users: IUser[]) => void;
-
-
 };
 
 const UserFormPage: React.FC<UserFormProps> = ({
@@ -148,7 +146,7 @@ const UserFormPage: React.FC<UserFormProps> = ({
           className="bg-indigo-600 text-white px-5 py-2 cursor-pointer rounded hover:bg-indigo-700 transition"
           onClick={handleSubmit(onSubmit)}
         >
-          {user && user.id ? "Update" : "Add"}
+          {user && user.email ? "Update" : "Add"}
         </button>
         <button
           onClick={close}

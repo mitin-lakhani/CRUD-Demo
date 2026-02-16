@@ -5,7 +5,6 @@ export const RootLayout = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("useEffect");
     return () => {
       true;
     };

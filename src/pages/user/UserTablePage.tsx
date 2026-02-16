@@ -73,7 +73,7 @@ const UserTable: React.FC<UserTableProps> = ({ onEdit, users, setUsers,}) => {
                     }} className="bg-indigo-500 px-2 py-2 rounded-md font-bold cursor-pointer">
                     Delete
                   </button>
-                  </>
+                  </> 
                   )}
                 </td>
               </tr>

@@ -21,9 +21,7 @@ const Sidebar = () => {
           src={logo}
           alt="logo"
         />
-        <button className="w-1/3">
-          <ThemeButton />
-        </button>
+        <ThemeButton />
       </div>
       <div className="w-full h-full px-4 flex gap-4 items-start justify-between flex-col">
         <div className="flex flex-col gap-8">
