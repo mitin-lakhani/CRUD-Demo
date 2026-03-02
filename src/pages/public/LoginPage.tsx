@@ -11,7 +11,7 @@ import { useAppState } from "@/utils/useAppState";
 // import { set } from "zod";
 const LoginPage = () => {
 	const navigate = useNavigate();
-	const [{user}, dispatch] = useAppState();
+	const [, dispatch] = useAppState();
 	const {
 		register,
 		handleSubmit,
@@ -39,7 +39,7 @@ const LoginPage = () => {
 			toast.success("Login SuccessFull");
 			setEmail(email);
 
-			reset();	
+			reset();
 			navigate("/dashboard");
 
 		} catch (error: any) {
