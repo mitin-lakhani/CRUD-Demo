@@ -31,6 +31,7 @@ export const initialState: AppState = {
   theme: "system",
   user: null,
   product:null,
+
   // Will be populated after login  
 };
 // ================== END: Initial State ==================

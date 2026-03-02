@@ -1,11 +1,11 @@
 import { Input } from "@/components/ui/Input";
 import { useAppState } from "@/utils/useAppState";
 import type { AdduserFormValue } from "@/validations/auth.schema";
+import axios from "axios";
 import { useEffect } from "react";
 
 import { useForm } from "react-hook-form"
 import { toast } from "sonner";
-
 
 const UpdateProfile = () => {
     const [{ user }, dispatch] = useAppState();
@@ -17,40 +17,60 @@ const UpdateProfile = () => {
     } = useForm<AdduserFormValue>({
             
     });
-
     useEffect(() => {
-        if (user) {
-            reset({
-                name: user?.name,
-                email: user?.email,                
-            })
+    if (user) {
+        reset({
+            name: user?.name,
+            email: user?.email,                 
+          })
         }
     }, [user])
 
-    const onSubmit = (data: AdduserFormValue) => {
-        console.log("submitted:", data);
-        if(!user) return;   
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const onSubmit = async (data: AdduserFormValue) => {
+        try{
+            const token = localStorage.getItem("authtoken");
+            const response = await axios.put("http://localhost:5000/api/auth/update-profile",{
+                name:data.name,
+                email:data.email,
+            },{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            });
+            console.log("update profile response value",response);
+            dispatch({
+                user:response.data.user,
+            })
+            console.log("response value is",response);
+            toast.success(response.data.message);
 
-        const oldEmail = user.email;
-        console.log("localstorage user",users);
+        }catch(error:any){
+            toast.error(error.response?.data?.message);
+        }
 
-        const updatedUsers = users.map((u: any) =>
-            u.email === oldEmail
-                ? { ...u, name: data.name, email: data.email }
-                : u
-        );
-        const updatedUser = {
-            ...user,
-            name: data.name,
-            email: data.email,
-        };
-        dispatch({user:updatedUser });
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        localStorage.setItem('user',JSON.stringify(updatedUser));
+    //     console.log("submitted:", data);
+    //     if(!user) return;   
+    //     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-        console.log('updated user',updatedUser);
-        toast.success("Profile updated successfully");
+    //     const oldEmail = user.email;
+    //     console.log("localstorage user",users);
+
+    //     const updatedUsers = users.map((u: any) =>
+    //         u.email === oldEmail
+    //             ? { ...u, name: data.name, email: data.email }
+    //             : u
+    //     );
+    //     const updatedUser = {
+    //         ...user,
+    //         name: data.name,
+    //         email: data.email,
+    //     };
+    //     dispatch({user:updatedUser });
+    //     localStorage.setItem("users", JSON.stringify(updatedUsers));
+    //     localStorage.setItem('user',JSON.stringify(updatedUser));
+
+    //     console.log('updated user',updatedUser);
+    //     toast.success("Profile updated successfully");
     };
 
     return (

@@ -5,18 +5,18 @@ import Sidebar from "../common/Sidebar";
 
 // this is protected routes userLayouts
 export const UserLayout = () => {
-	const [state ] = useAppState();
-	if(!state.user){
+	const token = localStorage.getItem("authtoken");
+	const [{user} ] = useAppState();
+	if(!user){
+		return user;
+	}
+	if(!token){
 		return <Navigate to="/login" replace />;
 	}
 	return (
 		<div className="flex  w-full">
 			<div className="w-50 fixed ">
 				<Sidebar/>
-				<ul>
-					<li>Products</li>
-					<li>AddProducts</li>
-				</ul>
 			</div>
 			<div className="w-[calc(100%)] ">	
 				<Outlet />

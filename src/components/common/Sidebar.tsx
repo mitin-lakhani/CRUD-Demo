@@ -7,9 +7,12 @@ const Sidebar = () => {
   const [{ user }, dispatch] = useAppState();
   const navigate = useNavigate();
 
+
+
   const logout = () => {
     dispatch({ user: null });
-    localStorage.removeItem("user");
+    localStorage.removeItem("authtoken");
+    
     navigate("/login");
   };
 
@@ -39,5 +42,4 @@ const Sidebar = () => {
     </div>
   );
 };
-
 export default Sidebar;

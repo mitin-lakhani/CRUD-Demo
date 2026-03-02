@@ -9,7 +9,7 @@ export type LoginFormValues = z.infer<typeof loginSchema>;
 export const registerSchema = z
 	.object({
 		email: z.string().min(1,"minimum 3 character are required").email("email is required"),
-		password: z.string().min(6,"minimum 6 character are required"),
+		password: z.string().min(6,"minimum 6 character are required"),	
 		confirmPassword: z.string().min(6),
 		name: z.string().min(3).regex(/^[a-zA-Z ]+$/,"Only letters and spaces allowed"),
 		// otp:z.number(),
@@ -66,7 +66,6 @@ export const productschema = z.object({
   image: z.string().url("Enter valid image URL"),
 });
 export type productFormValues = z.infer<typeof productschema>;
-
 
 // export const productcrudapischema = z.object({
 // 	productname:z.string().min(3,"Name should be >= 3 characters"),

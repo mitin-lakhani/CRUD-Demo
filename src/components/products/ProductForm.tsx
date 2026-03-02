@@ -146,5 +146,4 @@ const ProductForm = ({ editingProduct, onClose,onSuccess }: Props) => {
     </div>
   );
 };
-
 export default ProductForm;

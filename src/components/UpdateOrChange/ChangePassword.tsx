@@ -5,8 +5,10 @@ import {
   type ChangePasswordFormValue,
 } from '@/validations/auth.schema'
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
 
 const ChangePassword = () => {
   const [{ user },dispatch] = useAppState();
@@ -20,42 +22,62 @@ const ChangePassword = () => {
     resolver: zodResolver(changePasswordSchema),
   });
 
-  const onSubmit = (data: ChangePasswordFormValue) => {
-    console.log(data);
-    if (!user?.email) return;
+  const onSubmit = async (data: ChangePasswordFormValue) => {
+    try{
+      const token = localStorage.getItem("authtoken");
+       const response =  await axios.post("http://localhost:5000/api/auth/changepassword",{
+        currentpassword:data.currentPassword,
+        newpassword:data.newPassword
+       },{  
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+       });
+       dispatch({
+        user
+       })
+      toast.success(response.data.message);
+      reset();
 
 
-    //  Current password check
-    if (data.currentPassword !== user.password) {
-      toast.error("Current password is incorrect");
-      return;
+    }catch(error:any){
+      toast.error(error.response?.data?.message);
     }
+    // console.log(data);
+    // if (!user?.email) return;
 
-    // Updated user object
-    const updatedUser = {
-      ...user,
-      password: data.newPassword,
+
+    // //  Current password check
+    // if (data.currentPassword !== user.password) {
+    //   toast.error("Current password is incorrect");
+    //   return;
+    // }
+
+    // // Updated user object
+    // const updatedUser = {
+    //   ...user,
+    //   password: data.newPassword,
       
-    };
-    // Update logged-in user
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+    // };
+    // // Update logged-in user
+    // localStorage.setItem("user", JSON.stringify(updatedUser));
 
-    // dispatch user 
-    dispatch({
-      user:updatedUser
-    })
+    // // dispatch user 
+    // dispatch({
+    //   user:updatedUser
+    // })
 
-    // Update users list
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    // // Update users list
+    // const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    const updatedUsers = users.map((u: any) =>
-      u.id === user.id ? updatedUser : u
-    );
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    // const updatedUsers = users.map((u: any) =>
+    //   u.id === user.id ? updatedUser : u
+    // );
+    // localStorage.setItem("users", JSON.stringify(updatedUsers));
 
 
-    reset();
-    toast.success("Password changed successfully");
+    // reset();
+    // toast.success("Password changed successfully");
   };
 
   return (

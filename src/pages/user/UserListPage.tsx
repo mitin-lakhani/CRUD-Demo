@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import UserFormPage from "./UserFormPage";
 import UserTable from "./UserTablePage";
 import type { IUser } from "@/utils/types";
+import axios from "axios";
+import { toast } from "sonner";
+// import axios from "axios";
+// import { resolveElements } from "framer-motion";
+// import { toast } from "sonner";
+
+
 
 
 // top to bottom read execution
@@ -9,16 +16,33 @@ const UserListPage: React.FC = () => {
   const [editingUser, setEditingUser] = useState<IUser | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
-  
 
   // Load users from localStorage
   useEffect(() => {
-    const storedUsers = localStorage.getItem("users");
-    console.log(storedUsers);
-    if (storedUsers) {
-      setUsers(JSON.parse(storedUsers));
-    }
+    fetchUsers();
+
+
+    // // load user localstorage
+    // const storedUsers = localStorage.getItem("users");
+    // console.log(storedUsers);
+    // if (storedUsers) {
+    //   setUsers(JSON.parse(storedUsers));
+    // }
   }, []);
+
+  const fetchUsers = async () =>{
+    try{
+        const token = localStorage.getItem("authtoken");
+        const response = await axios.get("http://localhost:5000/api/users",{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        });
+        setUsers(response.data);
+    }catch(error:any){
+      toast.error(error.response?.data?.message);
+    }
+  }
 
   // handle button click
   const handleEdit = (user: IUser) => {

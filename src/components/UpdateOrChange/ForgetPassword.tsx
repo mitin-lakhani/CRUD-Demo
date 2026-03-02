@@ -1,77 +1,182 @@
-import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
-import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa6";
 
 type ForgotForm = {
   email: string;
-  password: string;
-  confirmPassword: string;
+  otp?: string;
+  password?: string;
+  confirmPassword?: string;
 };
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm<ForgotForm>();
+  const { register, handleSubmit, getValues } = useForm<ForgotForm>();
 
-  const onSubmit = (data: ForgotForm) => {
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const [showOtp, setShowOtp] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
 
+  const [loadingOtp, setLoadingOtp] = useState(false);
+  const [loadingVerify, setLoadingVerify] = useState(false);
+  const [loadingReset, setLoadingReset] = useState(false);
 
-    const userIndex = users.findIndex(
-      (u:any) => u.email === data.email);
-    if (userIndex === -1 ) {
-      toast.error("User with this email not found");
+  // STEP 1 - SEND OTP
+  const sendOtp = async (data: ForgotForm) => {
+    try {
+      setLoadingOtp(true);
+      await axios.post(
+        "http://localhost:5000/api/auth/forgot-password",
+        { email: data.email }
+      );
+      toast.success("OTP Sent to your email");
+      setShowOtp(true);
+
+    } catch (error: any) {
+      alert(error.response?.data?.message);
+    } finally {
+      setLoadingOtp(false);
+    }
+  };
+
+  // STEP 2 - VERIFY OTP
+  const verifyOtp = async () => {
+    try {
+      setLoadingVerify(true);
+      await axios.post(
+        "http://localhost:5000/api/auth/verify-reset-otp",
+        {
+          email: getValues("email"),
+          otp: getValues("otp"),
+        }
+      );
+
+      toast.success("OTP Verified");
+      setOtpVerified(true);
+
+    } catch (error: any) {
+      alert(error.response?.data?.message);
+    } finally {
+      setLoadingVerify(false);
+    }
+  };
+
+  // STEP 3 - RESET PASSWORD
+  const resetPassword = async () => {
+    const password = getValues("password");
+    const confirmPassword = getValues("confirmPassword");
+
+    if (password === '' && confirmPassword === '') {
+      toast.error("Can not Empty password");
       return;
     }
 
-    if (data.password !== data.confirmPassword) {
-      toast.error("Password not match");
+    if (password !== confirmPassword) {
+      ("Password not match");
       return;
     }
 
-    // update password
-    users[userIndex].password = data.password;
-    localStorage.setItem("users", JSON.stringify(users));
+    try {
+      setLoadingReset(true);
+      await axios.post(
+        "http://localhost:5000/api/auth/reset-password",
+        {
+          email: getValues("email"),
+          password,
+        }
+      );
 
-    toast.success("Password reset successful");
-    navigate("/login");
+      toast.success("Password Updated Successfully");
+      navigate("/login");
+
+    } catch (error: any) {
+      toast.error(error.response?.data?.message);
+    } finally {
+      setLoadingReset(false);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(sendOtp)}
         className="border p-6 rounded w-96 flex flex-col gap-4"
       >
-        <Link to={'/login'}><FaArrowLeft className="cursor-pointer"/></Link>
         <h2 className="text-xl font-bold text-center">
           Forgot Password
         </h2>
+
+        {/* EMAIL FIELD */}
         <Input
           label="Email"
           placeholder="Enter registered email"
-          className="font-semibold"
           {...register("email")}
-        />
-        <Input
-          type="password"
-          label="New Password"
-          placeholder="Enter new password"
-          className="font-semibold"
-          {...register("password")}
+          disabled={showOtp}
         />
 
-        <Input
-          type="password"
-          label="Confirm Password"
-          placeholder="Confirm new password"
-          className="font-semibold"
-          {...register("confirmPassword")}
-        />
+        {!showOtp && (
+          <button className="border p-2 cursor-pointer" type="submit" disabled={loadingOtp}>
+            {loadingOtp ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Sending...
+              </span>
+            ) : (
+              "Send OTP"
+            )}
+          </button>
 
-        <Button type="submit">Reset Password</Button>
+        )}
+
+        {/* OTP FIELD */}
+        {showOtp && !otpVerified && (
+          <>
+            <Input
+              label="Enter OTP"
+              maxLength={6}
+              {...register("otp")}
+            />
+            <button className="border p-2 cursor-pointer" disabled={loadingVerify} type="submit" onClick={verifyOtp}>
+              {loadingVerify ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin">
+                  </span>
+                  Verifying...
+                </span>
+              ):(
+                "Verify OTP"
+              )}
+            </button>
+          </>
+        )}
+
+        {/* PASSWORD FIELD */}
+        {otpVerified && (
+          <>
+            <Input
+              type="password"
+              label="New Password"
+              {...register("password")}
+            />
+            <Input
+              type="password"
+              label="Confirm Password"
+              {...register("confirmPassword")}
+            />
+            <button className="border p-2 cursor-pointer" disabled={loadingReset} type="submit" onClick={resetPassword}>
+              { loadingReset ? (  
+                    <span className="flex items-center justify-center gap-2 ">
+                      <span className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin"></span>
+                      Updating...
+                    </span>
+                ):(
+                  "Reset Password"
+              )}
+            </button>
+          </>
+        )}
       </form>
     </div>
   );

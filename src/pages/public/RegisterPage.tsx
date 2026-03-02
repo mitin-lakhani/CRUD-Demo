@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+// import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,18 +10,20 @@ import {
 import { toast } from "sonner";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { sendOtpEmail } from "@/utils/email";
+
 import { AnimatePresence, motion } from "framer-motion";
 import OtpVerifyForm from "./OtpVeryFyForm"
 
-const RegisterPage = () => {
-	// const navigate = useNavigate();
+// import { sendOtpEmail } from "@/utils/email";
 
+import axios from "axios";
+const RegisterPage = () => {
 	// UI states
 	const [showOtp, setShowOtp] = useState(false);
 	// const [enteredOtp, setEnteredOtp] = useState("");
 	const [currentEmail, setCurrentEmail] = useState("");
 	const [isVerified,] = useState(false);
+	const [isRegister, setIsRegister] = useState(false);
 
 	const {
 		register,
@@ -33,84 +35,84 @@ const RegisterPage = () => {
 	});
 
 	// STEP 1: REGISTER
-	const onSubmit = (data: RegisterFormValues) => {
-		const users = JSON.parse(localStorage.getItem("users") || "[]");
+	const onSubmit = async (data: RegisterFormValues) => {
+		console.log("register data", data);
+		try {
+			setIsRegister(true);
+			const response = await axios.post("http://localhost:5000/api/auth/register", data);
+			setCurrentEmail(data.email);
+			setShowOtp(true);
+			toast.success(response.data.message || "OTP send to email")
+			reset();
 
-		const userIndex = users.findIndex(
-			(user: any) => user.email === data.email
-		);
-		
-		// CASE 1: User already exists
-		if (userIndex !== -1) {
-			const existingUser = users[userIndex];
-			// If already verified
-			if (existingUser.status === "verified") {
-				toast.error("Account already verified. Please login.");
-				return;
-			}
-			// If not verified → resend OTP
-			else {
-				const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-				users[userIndex].otp = otp;
-				localStorage.setItem("users", JSON.stringify(users));
-
-				setCurrentEmail(data.email);
-				setShowOtp(true);
-
-				sendOtpEmail(data.email, otp);
-				toast.success("New OTP sent to your email");
-
-				return;
-			}
+		} catch (error: any) {
+			console.log("Error", error.response);
+			toast.error(
+				error.response?.data?.message || "Registration failed"
+			);
+		} finally {
+			setIsRegister(false);
 		}
 
-		// CASE 2: New user
-		const otp = Math.floor(100000 + Math.random() * 900000).toString();
-		const newUser = {
-			name: data.name,
-			email: data.email,
-			password: data.password,
-			otp: otp,
-			status: "unverified",
-		};
-		users.push(newUser);
-		localStorage.setItem("users", JSON.stringify(users));
 
 
 
-		setCurrentEmail(data.email);
-		setShowOtp(true);
+		// this register are localstorage with
 
-		sendOtpEmail(data.email, otp);
-		toast.success("OTP sent to email");
+		// const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-		reset();
+		// const userIndex = users.findIndex(
+		// 	(user: any) => user.email === data.email
+		// );
+
+		// // CASE 1: User already exists
+		// if (userIndex !== -1) {
+		// 	const existingUser = users[userIndex];
+		// 	// If already verified
+		// 	if (existingUser.status === "verified") {
+		// 		toast.error("Account already verified. Please login.");
+		// 		return;
+		// 	}
+		// 	// If not verified → resend OTP
+		// 	else {
+		// 		const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+		// 		users[userIndex].otp = otp;
+		// 		localStorage.setItem("users", JSON.stringify(users));
+
+		// 		setCurrentEmail(data.email);
+		// 		setShowOtp(true);
+
+		// 		sendOtpEmail(data.email, otp);
+		// 		toast.success("New OTP sent to your email");
+
+		// 		return;
+		// 	}
+		// }
+		// // CASE 2: New user
+		// const otp = Math.floor(100000 + Math.random() * 900000).toString();
+		// const newUser = {
+		// 	name: data.name,
+		// 	email: data.email,
+		// 	password: data.password,
+		// 	otp: otp,
+		// 	status: "unverified",
+		// };
+		// users.push(newUser);
+		// localStorage.setItem("users", JSON.stringify(users));
+
+
+
+		// setCurrentEmail(data.email);
+		// setShowOtp(true);
+
+		// sendOtpEmail(data.email, otp);
+		// toast.success("OTP sent to email");
+
+		// reset();
 	};
 
-	// STEP 2: VERIFY OTP
-	// const verifyOtp = (enteredOtp: number) => {
-	// 	console.log(enteredOtp);
-	// 	console.log(alert())
-	// 	const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-	// 	const userIndex = users.findIndex((user: any) => user.email === currentEmail);
-
-	// 	if (users[userIndex].otp === enteredOtp) {
-	// 		users[userIndex].status = "varified";
-	// 		users[userIndex].otp;
-	// 		localStorage.setItem("users", JSON.stringify(users));
-
-	// 		setIsVerified(true);
-	// 		toast.success("Account verified");
-
-	// 		setTimeout(() => {
-	// 			navigate("/login");
-	// 		}, 3000);
-	// 	} else {
-	// 		toast.error("Invalid OTP");
-	// 	}
-	// };
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)]">
@@ -182,8 +184,17 @@ const RegisterPage = () => {
 									errorMsg={errors.confirmPassword?.message}
 									{...register("confirmPassword")}
 								/>
+								<button className="border p-2 cursor-pointer" type="submit" disabled={isRegister}>
+									{ isRegister ? (
+										<span className="flex items-center justify-center gap-2">
+											<span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+											Register...
+										</span>
+									) : (
+										"Register"
+									)}
+								</button>
 
-								<Button type="submit">Register</Button>
 							</form>
 						</motion.div>
 					)}

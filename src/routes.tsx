@@ -1,65 +1,67 @@
-// app/router.tsx
-import { createBrowserRouter } from "react-router-dom";
-import { lazy } from "react";
-import { RootLayout } from "./components/layouts/RootLayout";
-import { PublicLayout } from "./components/layouts/PublicLayout";
-import { UserLayout } from "./components/layouts/UserLayout";
-// import Products from "./pages/user/ProductsListPage";
-import { AuthLayout } from "./components/layouts/AuthLayout";
-import NotFoundPage from "./pages/NotFoundPage";
-import ViewProfile from "./pages/user/ViewProfilePage";
-import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
-// import ProductCrudWithApi from "./pages/user/ProductCrudWithApi";
-// import UpdateProduct from "./components/products/UpdateProduct";/
-// import AddProduct from "./components/products/AddProduct";
+  // app/router.tsx
+  import { createBrowserRouter } from "react-router-dom";
+  import { lazy } from "react";
+  import { RootLayout } from "./components/layouts/RootLayout";
+  import { PublicLayout } from "./components/layouts/PublicLayout";
+  import { UserLayout } from "./components/layouts/UserLayout";
+  // import Products from "./pages/user/ProductsListPage";
+  import { AuthLayout } from "./components/layouts/AuthLayout";
+  import NotFoundPage from "./pages/NotFoundPage";
+  import ViewProfile from "./pages/user/ViewProfilePage";
+  import ForgotPassword from "./components/UpdateOrChange/ForgetPassword";
+
+  // import ProductCrudWithApi from "./pages/user/ProductCrudWithApi";
+  // import UpdateProduct from "./components/products/UpdateProduct";/
+  // import AddProduct from "./components/products/AddProduct";
 
 
-const Home = lazy(() => import("@/pages/public/HomePage"));
-const Login = lazy(() => import("@/pages/public/LoginPage"));
-const Register = lazy(() => import("@/pages/public/RegisterPage"));
-const Dashboard = lazy(() => import("@/pages/user/DashboardPage"));
-const UserList = lazy(() => import("@/pages/user/UserListPage"));
-const Product = lazy(()=>import("@/pages/user/ProductsListPage"))
-// const UserForm = lazy(() => import("@/pages/user/UserFormPage"));
+  const Home = lazy(() => import("@/pages/public/HomePage"));
+  const Login = lazy(() => import("@/pages/public/LoginPage"));
+  const Register = lazy(() => import("@/pages/public/RegisterPage"));
+  const Dashboard = lazy(() => import("@/pages/user/DashboardPage"));
+  const UserList = lazy(() => import("@/pages/user/UserListPage"));
+  const Product = lazy(()=>import("@/pages/user/ProductsListPage"))
+  // const UserForm = lazy(() => import("@/pages/user/UserFormPage"));
 
 
 
-export const router = createBrowserRouter([
-  {
-    element: <RootLayout />,
-    children: [
-      {
-        element: <PublicLayout />,
-        children: [
-          { path: "/", element: <Home /> },
-          {
-            element: <AuthLayout />,
-            children: [
-              { path: "/login", element: <Login /> },
-              { path: "/register", element: <Register /> },
-              {path:"/forget-password",element:<ForgotPassword/>},
-              // {path:"/sendotp",element:<SendOtp/>},
-            ],
-          },
-          { path: "*", element: <NotFoundPage /> },
-        ],
-      },
-      {
-        element: <UserLayout />,
-        children: [
-          { path: "/dashboard", element: <Dashboard /> },
-          { path: "/users", element: <UserList /> },
-          //  { path: "/products", element: <Products /> },
-          {path:"/profile",element:<ViewProfile/>},
-          {path:"/products",element:<Product/>},
-          // {path:"/productcrudapi",element:<ProductCrudWithApi/>}
-          // {path:"/update-product",element:<UpdateProduct/>}
-          // { path: "/users/new", element: <UserForm /> },
-          // { path: "/users/:id", element: <UserForm /> },
-        ],
-      },
-    ],
-    // 404 route
-    
-  },
-]);
+  export const router = createBrowserRouter([
+    {
+      element: <RootLayout />,
+      children: [
+        {
+          element: <PublicLayout />,
+          children: [
+            { path: "/", element: <Home /> },
+            {
+              element: <AuthLayout />,
+              children: [
+                { path: "/login", element: <Login /> },
+                { path: "/register", element: <Register /> },
+                {path:"/forget-password",element:<ForgotPassword/>},
+                // {path:"/sendotp",element:<SendOtp/>},
+              ],
+            },
+            { path: "*", element: <NotFoundPage /> },
+          ],
+        },
+        {
+          element: <UserLayout />,
+          children: [
+            { path: "/dashboard", element:<Dashboard/>},
+            { path: "/users", element: <UserList /> },
+            {path:"/profile",element:<ViewProfile/>},
+            {path:"/products",element:<Product/>},
+
+            //  { path: "/products", element: <Products /> },
+            // {path:"/productcrudapi",element:<ProductCrudWithApi/>}
+            // {path:"/update-product",element:<UpdateProduct/>}
+            // { path: "/users/new", element: <UserForm /> },
+            // { path: "/users/:id", element: <UserForm /> },
+          ],
+        },
+      ],
+      // 404 route
+        
+    },
+  ]);
