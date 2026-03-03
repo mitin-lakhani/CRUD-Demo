@@ -28,7 +28,7 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
     try {
 
       setIsVerifyOtp(true);
-      const response = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+      const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/verify-otp", {
         email: email,
         otp: data.otp
 

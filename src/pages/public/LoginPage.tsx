@@ -25,7 +25,7 @@ const LoginPage = () => {
 	const onSubmit = async (data: LoginFormValues) => {
 		console.log("login data is",data);
 		try {
-			const response = await axios.post("http://localhost:5000/api/auth/login",data)
+			const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/login",data)
 			console.log('response', response);
 			// set use app state
 			dispatch({
