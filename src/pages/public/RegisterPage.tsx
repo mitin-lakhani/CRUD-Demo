@@ -39,7 +39,8 @@ const RegisterPage = () => {
 		console.log("register data", data);
 		try {
 			setIsRegister(true);
-			const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/register",data,{withCredentials:true});
+			const response = await axios.post("http://backendapi-mo9g.onrender.com/api/auth/register",data);
+
 			setCurrentEmail(data.email);
 			setShowOtp(true);
 			toast.success(response.data.message || "OTP send to email")
