@@ -33,23 +33,23 @@ const RegisterPage = () => {
 	} = useForm<RegisterFormValues>({
 		resolver: zodResolver(registerSchema),
 	});
-
+	
 	// STEP 1: REGISTER
 	const onSubmit = async (data: RegisterFormValues) => {
 		console.log("register data", data);
 		try {
 			setIsRegister(true);
-			const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/register", data);
+			const response = await axios.post("https://transcendent-frangollo-4b6ddc.netlify.app/register",data);
 			setCurrentEmail(data.email);
 			setShowOtp(true);
 			toast.success(response.data.message || "OTP send to email")
 			reset();
-
 		} catch (error: any) {
 			console.log("Error", error.response);
 			toast.error(
 				error.response?.data?.message || "Registration failed"
 			);
+			console.log("data",error.response?.data);
 		} finally {
 			setIsRegister(false);
 		}
@@ -111,8 +111,6 @@ const RegisterPage = () => {
 
 		// reset();
 	};
-
-
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[calc(100dvh-113px)]">
