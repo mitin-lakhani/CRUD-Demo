@@ -28,7 +28,7 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
     try {
 
       setIsVerifyOtp(true);
-      const response = await axios.post("https://transcendent-frangollo-4b6ddc.netlify.app/verify-otp", {
+      const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/", {
         email: email,
         otp: data.otp
 
