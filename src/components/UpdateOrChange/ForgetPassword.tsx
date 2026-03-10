@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     try {
       setLoadingOtp(true);
       await axios.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        "https://backendapi-mo9g.onrender.com/api/auth/forgot-password",
         { email: data.email }
       );
       toast.success("OTP Sent to your email");
@@ -46,7 +46,7 @@ const ForgotPassword = () => {
     try {
       setLoadingVerify(true);
       await axios.post(
-        "http://localhost:5000/api/auth/verify-reset-otp",
+        "https://backendapi-mo9g.onrender.com/api/auth/verify-reset-otp",
         {
           email: getValues("email"),
           otp: getValues("otp"),
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
     try {
       setLoadingReset(true);
       await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
+        "https://backendapi-mo9g.onrender.com/api/auth/reset-password",
         {
           email: getValues("email"),
           password,

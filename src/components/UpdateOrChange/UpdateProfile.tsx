@@ -29,7 +29,7 @@ const UpdateProfile = () => {
     const onSubmit = async (data: AdduserFormValue) => {
         try{
             const token = localStorage.getItem("authtoken");
-            const response = await axios.put("http://localhost:5000/api/auth/update-profile",{
+            const response = await axios.put("https://backendapi-mo9g.onrender.com/api/auth/update-profile",{
                 name:data.name,
                 email:data.email,
             },{
