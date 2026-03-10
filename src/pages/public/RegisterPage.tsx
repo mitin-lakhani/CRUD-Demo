@@ -39,7 +39,7 @@ const RegisterPage = () => {
 		console.log("register data", data);
 		try {
 			setIsRegister(true);
-			const response = await axios.post("http://backendapi-mo9g.onrender.com/api/auth/register",data);
+			const response = await axios.post("https://backendapi-mo9g.onrender.com/api/auth/register",data);
 
 			setCurrentEmail(data.email);
 			setShowOtp(true);

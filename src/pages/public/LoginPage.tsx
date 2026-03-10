@@ -38,7 +38,6 @@ const LoginPage = () => {
 
 			toast.success("Login SuccessFull");
 			setEmail(email);
-
 			reset();
 			navigate("/dashboard");
 
