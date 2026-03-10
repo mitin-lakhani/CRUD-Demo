@@ -6,7 +6,7 @@ import { otpSchema, type OtpFormValues } from "@/validations/auth.schema";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
-import {useEffect,useState } from "react";
+import {useState } from "react";
 import axios from "axios";
 
 
@@ -14,7 +14,7 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
   const navigate = useNavigate();
   const [otp, setOpt] = useState("")
   const [verifyOtp, setIsVerifyOtp] = useState(false);
-  const [timeleft, setTimeLeft] = useState(30);
+  // const [timeleft, setTimeLeft] = useState(60);
 
   const {
     register,
@@ -24,16 +24,16 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
     resolver: zodResolver(otpSchema),
   });
 
-  useEffect(() => {
-    if (timeleft === 0) return;
+  // useEffect(() => {
+  //   if (timeleft === 0) return;
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
+  //   const timer = setInterval(() => {
+  //     setTimeLeft((prev) => prev - 1);
+  //   }, 1000);
 
-    return () => clearInterval(timer);
+  //   return () => clearInterval(timer);
 
-  }, [timeleft])
+  // }, [timeleft])
   const onSubmit = async (data: OtpFormValues) => {
     try {
 
@@ -76,15 +76,15 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
     //   toast.error("Invalid OTP");
     // }
   };
-  const resendOtp = async () => {
-    try {
-      axios.post("https://backendapi-mo9g.onrender.com/api/auth/resend-otp", { email });
-      toast.success("OTP Resend SuccessFully");
-      setTimeLeft(30);
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "Failed To Resend OTP");
-    }
-  }
+  // const resendOtp = async () => {
+  //   try {
+  //     axios.post("https://backendapi-mo9g.onrender.com/api/auth/resend-otp", { email });
+  //     toast.success("OTP Resend SuccessFully");
+  //     setTimeLeft(30);
+  //   } catch (error: any) {
+  //     toast.error(error.response?.data?.message || "Failed To Resend OTP");
+  //   }
+  // }
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -112,7 +112,7 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
           }
         </button>
       </form>
-      <div className="text-center mt-5">
+      {/* <div className="text-center mt-5">
         {timeleft > 0 ? (
           <p className="text-sm text-white">
             Resend OTP in {timeleft}s
@@ -126,7 +126,7 @@ const OtpVerifyForm = ({ email }: { email: string }) => {
             Resend OTP
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
